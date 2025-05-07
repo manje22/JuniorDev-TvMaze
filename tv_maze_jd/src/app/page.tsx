@@ -40,7 +40,7 @@ export default function Home() {
               {shows.map((s) => (
                 <li key={s.id}>
                   <Link href={`/shows/${s.id}`}>{s.name}</Link>
-          </li>
+                </li>
               ))}
             </ul>
           </div>
