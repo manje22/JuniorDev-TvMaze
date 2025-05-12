@@ -29,7 +29,7 @@ export default async function ShowCast({params}: Props) {
                 <h2>Cast:</h2>
                 <div>
                     {castData.map((person: any) => (
-                        <Link href={`../../cast/${person.person.id}`}>
+                        <Link href={`../../people/${person.person.id}`}>
                             <CastMemberDisplay key={person.person.id} person={person}></CastMemberDisplay>
                         </Link>
                     ))}
