@@ -2,6 +2,7 @@ import { error } from "console";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import BackButton from "../../../../components/BackButton";
 
 export default async function ShowDetails({ params }) {
   const { id } = await params;
@@ -63,6 +64,8 @@ export default async function ShowDetails({ params }) {
       <div>
         <Link href={`/shows/${id}/cast`}>Click here to view cast members</Link>
       </div>
+
+      <BackButton/>
     </div>
   );
 }
