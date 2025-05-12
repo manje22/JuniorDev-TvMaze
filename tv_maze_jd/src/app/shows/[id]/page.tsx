@@ -60,6 +60,9 @@ export default async function ShowDetails({ params }) {
       <div>
         <Link href={`/shows/${id}/episodes`}>Click here to view episodes</Link>
       </div>
+      <div>
+        <Link href={`/shows/${id}/cast`}>Click here to view cast members</Link>
+      </div>
     </div>
   );
 }
