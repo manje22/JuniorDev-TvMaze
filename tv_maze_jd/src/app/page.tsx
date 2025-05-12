@@ -1,27 +1,26 @@
-"use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import ShowDisplay from "../../components/ShowDisplay";
 
-export default function Home() {
+export default async function Home() {
   const apiPageSize = 250;
   const showsPerPage = 25;
 
-  const [shows, setShows] = useState([]);
-  const [offset, setOffset] = useState(20);
+  // const [shows, setShows] = useState([]);
+  // const [offset, setOffset] = useState(20);
 
-  useEffect(() => {
-    fetch("https://api.tvmaze.com/shows")
-      .then((res) => res.json())
-      .then((data) => {
-        const startIndex = offset % apiPageSize;
-        const endIndex = startIndex + showsPerPage;
-        const toDisplay = data.slice(startIndex, endIndex);
-        const sorted = toDisplay.sort((a,b) => a.rating.average - b.rating.average);
-        console.log(sorted);
-        setShows(sorted);
-      });
-  }, [offset]);
+  const showsRes = await fetch("https://api.tvmaze.com/shows");
+
+  if (!showsRes.ok) {
+    throw new Error("Show list not found");
+  }
+
+  const showData = await showsRes.json();
+  console.log("show data:", showData);
+
+  const toDisplay = showData.slice(0, 25);
+  const sorted = toDisplay.sort((a, b) => a.rating.average - b.rating.average);
+  console.log(sorted);
 
 
   return (
@@ -36,13 +35,11 @@ export default function Home() {
         <div>
           <div className="text-center">ovde ide trazilica</div>
           <div className="flex flex-col items-center">
-            <ul>
-              {shows.map((s) => (
-                <li key={s.id}>
-                  <Link href={`/shows/${s.id}`}>{s.name}</Link>
-                </li>
-              ))}
-            </ul>
+            {sorted.map((s:any) => (
+              <Link href={`/shows/${s.id}`} key={s.id} >
+                <ShowDisplay show={s}></ShowDisplay>
+              </Link>
+            ))}
           </div>
           <div>
             <button>Load more</button>
