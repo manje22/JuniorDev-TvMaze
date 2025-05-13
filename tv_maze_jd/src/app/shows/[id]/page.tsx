@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
+import FavoriteButton from "../../../../components/FavoriteButton";
 
 export default async function ShowDetails({ params }) {
   const { id } = await params;
@@ -58,6 +59,7 @@ export default async function ShowDetails({ params }) {
           ))
         }
       </div>
+      <FavoriteButton id={id}></FavoriteButton>
       <div>
         <Link href={`/shows/${id}/episodes`}>Click here to view episodes</Link>
       </div>
