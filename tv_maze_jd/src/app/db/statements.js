@@ -3,36 +3,46 @@ const db = require('better-sqlite3')('database.db')
 
 const createTable = () => {
     const sql = `
-        CREATE TABLE favoriteShows(
-            id INTEGER,
+        CREATE TABLE IF NOT EXISTS favoriteShows(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tvmaze_id INTEGER UNIQUE,
             name TEXT NOT NULL,
-            age INTEGER
+            image TEXT NOT NULL,
         )
     `
     db.prepare(sql).run()
-}
+};
 
-const insertTable = (name, age) => {
+createTable();
+
+
+export const insertNewShow = (tvmaze_id, name, image) => {
+    const existing = db.prepare(`SELECT * FROM favoriteShows WHERE tvmaze_id = ?`).get(tvmaze_id);
+    if (existing) {
+        console.log("Already in favorites");
+        return;
+    }
+
     const sql = `
-        INSERT INTO favoriteShows (name, age)
-        VALUES(?,?)
+        INSERT OR IGNORE INTO favoriteShows (tvmaze_id, name, image)
+        VALUES(?,?,?)
     `
-    db.prepare(sql).run(name, age)
+    db.prepare(sql).run(tvmaze_id, name, image)
 }
 
-const getUsers =() =>{
+export const getShows = () =>{
     const sql = `
         SELECT * FROM favoriteShows
     `
     const rows = db.prepare(sql).all()
-    console.log(rows);
+    return rows
 }
 
-const getUser =(id) =>{
+export const getShowbyId = (id) => {
     const sql = `
         SELECT * FROM favoriteShows
         WHERE id = ?
     `
-    const rows = db.prepare(sql).all()
-    console.log(rows);
+    const rows = db.prepare(sql).get(id)
+    return rows
 }
