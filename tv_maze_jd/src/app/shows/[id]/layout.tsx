@@ -25,7 +25,9 @@ export default async function ShowLayout({
                 Click here to view episodes
               </Link>
             </li>
-            <li>favoriti</li>
+            <li>
+              <Link href={'/favorites/favoriteShows'}>Favorite shows</Link>
+            </li>
           </ul>
         </nav>
         <BackButton></BackButton>

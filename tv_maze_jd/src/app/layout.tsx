@@ -32,7 +32,7 @@ export default function RootLayout({
           <header>
             <nav className="flex gap-10 text-2xl">
               <Link href={'/'} className="hover:bg-white">Homepage</Link>
-              <Link href={'/favorites'} className="hover:bg-white">Favorites</Link>
+              <Link href={'/favorites/favoriteShows'} className="hover:bg-white">Favorites</Link>
               <Link href={'/actors'} className="hover:bg-white">Actors</Link>
             </nav>
           </header>
