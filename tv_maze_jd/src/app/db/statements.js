@@ -7,7 +7,7 @@ const createTable = () => {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             tvmaze_id INTEGER UNIQUE,
             name TEXT NOT NULL,
-            image TEXT NOT NULL,
+            image TEXT NOT NULL
         )
     `
     db.prepare(sql).run()
@@ -31,18 +31,19 @@ export const insertNewShow = (tvmaze_id, name, image) => {
 }
 
 export const deleteShow = (tvmaze_id) => {
-    const existing = db.prepare(`SELECT * FROM favoriteShows WHERE tvmaze_id = ?`).get(tvmaze_id);
-    if (!existing) {
-        console.log("Not found");
-        return;
-    }
+  const existing = db
+    .prepare(`SELECT * FROM favoriteShows WHERE tvmaze_id = ?`)
+    .get(tvmaze_id);
+  if (!existing) {
+    console.log("Not found");
+    return;
+  }
 
-    const sql = `
-        DELETE FROM favoriteShows (tvmaze_id, name, image)
-        WHERE tvmaze_id = ?
-    `
-    db.prepare(sql).run(tvmaze_id)
-}
+  const sql = `
+        DELETE FROM favoriteShows WHERE tvmaze_id = ?
+    `;
+  db.prepare(sql).run(tvmaze_id);
+};
 
 export const getShows = () =>{
     const sql = `

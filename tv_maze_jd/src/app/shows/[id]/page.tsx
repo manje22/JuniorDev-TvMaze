@@ -16,6 +16,12 @@ export default async function ShowDetails({ params }) {
   }
 
   const showData = await showRes.json();
+  const showFav = {
+    tvmaze_id: showData.id,
+    name: showData.name,
+    image: showData.image.medium
+  };
+
   const poster = showData.image.original;
   const cast = showData._embedded.cast;
   console.log(cast);
@@ -41,7 +47,7 @@ export default async function ShowDetails({ params }) {
             Genres:
             <div>
               {showData.genres.map((g) => (
-                <p>{g}</p>
+                <p key={g}>{g}</p>
               ))}
             </div>
           </li>
@@ -51,7 +57,7 @@ export default async function ShowDetails({ params }) {
         <p>Cast</p>
         {
           cast.map((c) => (
-            <div>
+            <div key={c.person.id}>
               <Image src={c.person.image.original} alt={c.person.name} width={100} height={100}></Image>
               <p>{c.person.name}</p>
               <p>plays: {c.character.name}</p>
@@ -59,7 +65,7 @@ export default async function ShowDetails({ params }) {
           ))
         }
       </div>
-      <FavoriteButton id={id}></FavoriteButton>
+      <FavoriteButton show={showFav}></FavoriteButton>
       <div>
         <Link href={`/shows/${id}/episodes`}>Click here to view episodes</Link>
       </div>
