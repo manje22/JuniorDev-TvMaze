@@ -1,23 +1,15 @@
 import Image from "next/image";
 
-type ShowData = {
-    show:{
-        name: string;
-        image:{
-            medium: string;
-        };
-    };
-};
 
-export default async function ShowDisplay({show}: ShowData) {
+export default async function ShowDisplay({image, name}) {
 
     return(
         <div className="bg-blue-50 w-fit p-10 flex flex-col items-center">
             <div>
-                <Image src={show.image.medium} width={300} height={300} alt="image"></Image>
+                <Image src={image} width={300} height={300} alt="image"></Image>
             </div>
             <div>
-                <p>Name: {show.name}</p>
+                <p>Name: {name}</p>
             </div>
         </div>
     )

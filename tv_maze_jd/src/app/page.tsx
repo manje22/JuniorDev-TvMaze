@@ -37,7 +37,7 @@ export default async function Home() {
           <div className="grid grid-cols-4 mt-20 gap-10">
             {sorted.map((s:any) => (
               <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
-                <ShowDisplay show={s}></ShowDisplay>
+                <ShowDisplay image={s.image.medium} name={s.name}></ShowDisplay>
               </Link>
             ))}
           </div>
