@@ -30,6 +30,20 @@ export const insertNewShow = (tvmaze_id, name, image) => {
     db.prepare(sql).run(tvmaze_id, name, image)
 }
 
+export const deleteShow = (tvmaze_id) => {
+    const existing = db.prepare(`SELECT * FROM favoriteShows WHERE tvmaze_id = ?`).get(tvmaze_id);
+    if (!existing) {
+        console.log("Not found");
+        return;
+    }
+
+    const sql = `
+        DELETE FROM favoriteShows (tvmaze_id, name, image)
+        WHERE tvmaze_id = ?
+    `
+    db.prepare(sql).run(tvmaze_id)
+}
+
 export const getShows = () =>{
     const sql = `
         SELECT * FROM favoriteShows
@@ -38,11 +52,11 @@ export const getShows = () =>{
     return rows
 }
 
-export const getShowbyId = (id) => {
+export const getShowbyId = (tvmaze_id) => {
     const sql = `
         SELECT * FROM favoriteShows
-        WHERE id = ?
+        WHERE tvmaze_id = ?
     `
-    const rows = db.prepare(sql).get(id)
+    const rows = db.prepare(sql).get(tvmaze_id)
     return rows
 }
