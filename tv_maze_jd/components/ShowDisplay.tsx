@@ -12,9 +12,9 @@ type ShowData = {
 export default async function ShowDisplay({show}: ShowData) {
 
     return(
-        <div>
+        <div className="bg-blue-50 w-fit p-10 flex flex-col items-center">
             <div>
-                <Image src={show.image.medium} width={50} height={50} alt="image"></Image>
+                <Image src={show.image.medium} width={300} height={300} alt="image"></Image>
             </div>
             <div>
                 <p>Name: {show.name}</p>

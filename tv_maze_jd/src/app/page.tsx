@@ -34,9 +34,9 @@ export default async function Home() {
         </div>
         <div>
           <div className="text-center">ovde ide trazilica</div>
-          <div className="flex flex-col items-center">
+          <div className="grid grid-cols-4 mt-20 gap-10">
             {sorted.map((s:any) => (
-              <Link href={`/shows/${s.id}`} key={s.id} >
+              <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
                 <ShowDisplay show={s}></ShowDisplay>
               </Link>
             ))}
