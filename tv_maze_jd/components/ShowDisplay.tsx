@@ -1,7 +1,9 @@
+"use client"
+
 import Image from "next/image";
 
 
-export default async function ShowDisplay({image, name}) {
+export default function ShowDisplay({image, name}) {
 
     return(
         <div className="bg-blue-50 w-fit p-10 flex flex-col items-center">

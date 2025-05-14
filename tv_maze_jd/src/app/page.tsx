@@ -1,26 +1,36 @@
+"use client"
 
 import Link from "next/link";
 import ShowDisplay from "../../components/ShowDisplay";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
-export default async function Home() {
-  const apiPageSize = 250;
-  const showsPerPage = 25;
+export default function Home() {
+  const [currentPage, setCurrentPage] = useState(0)
+  const [showData, setShowData] = useState([]);
+  const {ref, inView} = useInView();
 
-  // const [shows, setShows] = useState([]);
-  // const [offset, setOffset] = useState(20);
+  useEffect(() => {
+    fetch(
+      `https://api.tvmaze.com/shows?page=${currentPage}`
+    ).then((res) => res.json())
+    .then((data) => {
+      setShowData((prev) => [...prev, ...data]);
+    })
+    .catch((error) => console.log("showdata error", error))
+  }, [currentPage]);
 
-  const showsRes = await fetch("https://api.tvmaze.com/shows");
+  useEffect(() => {
+    if (inView) {
+      fetch(`https://api.tvmaze.com/shows?page=${currentPage}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setShowData((prev) => [...prev, ...data]);
+        })
+        .catch((error) => console.log("showdata error", error));
+    }
+  }, [inView]);
 
-  if (!showsRes.ok) {
-    throw new Error("Show list not found");
-  }
-
-  const showData = await showsRes.json();
-  console.log("show data:", showData);
-
-  const toDisplay = showData.slice(0, 25);
-  const sorted = toDisplay.sort((a, b) => a.rating.average - b.rating.average);
-  console.log(sorted);
 
 
   return (
@@ -35,15 +45,18 @@ export default async function Home() {
         <div>
           <div className="text-center">ovde ide trazilica</div>
           <div className="grid grid-cols-4 mt-20 gap-10">
-            {sorted.map((s:any) => (
+            {showData.map((s:any) => (
               <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
                 <ShowDisplay image={s.image.medium} name={s.name}></ShowDisplay>
               </Link>
             ))}
           </div>
-          <div>
-            <button>Load more</button>
-          </div>
+        </div>
+        <div ref={ref}>
+          Loading...
+          {/* <button className="bg-red-700" onClick={() => {
+            setCurrentPage((curr) => curr +1);
+          }}>Load more</button> */}
         </div>
       </main>
     </div>
