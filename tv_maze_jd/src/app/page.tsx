@@ -11,6 +11,9 @@ export default function Home() {
   const {ref, inView} = useInView();
 
   useEffect(() => {
+    console.log("Data:",showData.length);
+    if(currentPage === 0 && !showData.length)
+      return;
     fetch(
       `https://api.tvmaze.com/shows?page=${currentPage}`
     ).then((res) => res.json())
