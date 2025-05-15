@@ -22,12 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     if (inView) {
-      fetch(`https://api.tvmaze.com/shows?page=${currentPage}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setShowData((prev) => [...prev, ...data]);
-        })
-        .catch((error) => console.log("showdata error", error));
+      setCurrentPage((prev)=> prev+1);
     }
   }, [inView]);
 
@@ -54,9 +49,6 @@ export default function Home() {
         </div>
         <div ref={ref}>
           Loading...
-          {/* <button className="bg-red-700" onClick={() => {
-            setCurrentPage((curr) => curr +1);
-          }}>Load more</button> */}
         </div>
       </main>
     </div>
