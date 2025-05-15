@@ -9,6 +9,16 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(0)
   const [showData, setShowData] = useState([]);
   const {ref, inView} = useInView();
+  const viewPerPage = 24;
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(24);
+  const [display, setDisplay] = useState([]);
+
+  // function UpdateDisplay(){
+  //   const tempArray = showData.splice(startIndex, endIndex)
+  //   setDisplay([...display, tempArray]);
+  // }
+
 
   useEffect(() => {
     console.log("Data:",showData.length);
@@ -19,6 +29,7 @@ export default function Home() {
     ).then((res) => res.json())
     .then((data) => {
       setShowData((prev) => [...prev, ...data]);
+      console.log("Show data:", data);
     })
     .catch((error) => console.log("showdata error", error))
   }, [currentPage]);
@@ -26,10 +37,14 @@ export default function Home() {
   useEffect(() => {
     if (inView) {
       setCurrentPage((prev)=> prev+1);
+      setStartIndex((prev) => prev+viewPerPage);
+      setEndIndex((prev)=> prev+viewPerPage);
     }
   }, [inView]);
 
-
+  useEffect(()=>{
+    setDisplay((prev) => [...prev, ...showData.slice(startIndex, endIndex)]);
+  }, [showData,startIndex, endIndex])
 
   return (
     <div className="">
@@ -43,7 +58,7 @@ export default function Home() {
         <div>
           <div className="text-center">ovde ide trazilica</div>
           <div className="grid grid-cols-4 mt-20 gap-10">
-            {showData.map((s:any) => (
+            {display.map((s:any) => (
               <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
                 <ShowDisplay image={s.image.medium} name={s.name}></ShowDisplay>
               </Link>
