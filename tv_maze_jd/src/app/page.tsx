@@ -4,6 +4,7 @@ import Link from "next/link";
 import ShowDisplay from "../../components/ShowDisplay";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import SearchBar from "../../components/SearchBar";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0)
@@ -56,7 +57,9 @@ export default function Home() {
           </h2>
         </div>
         <div>
-          <div className="text-center">ovde ide trazilica</div>
+          <div className="text-center">
+            <SearchBar></SearchBar>
+          </div>
           <div className="grid grid-cols-4 mt-20 gap-10">
             {display.map((s:any) => (
               <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
