@@ -57,7 +57,7 @@ export default async function ShowDetails({ params }) {
         <p>Cast</p>
         {
           cast.map((c) => (
-            <div key={c.person.id}>
+            <div key={c.person.id+c.character.id}>
               <Image src={c.person.image.original} alt={c.person.name} width={100} height={100}></Image>
               <p>{c.person.name}</p>
               <p>plays: {c.character.name}</p>

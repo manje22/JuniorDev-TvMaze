@@ -5,31 +5,30 @@ import ShowDisplay from "../../components/ShowDisplay";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import SearchBar from "../../components/SearchBar";
+import Filter from "../../components/Filter";
+import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0)
   const [showData, setShowData] = useState([]);
   const {ref, inView} = useInView();
   const viewPerPage = 24;
-  const [startIndex, setStartIndex] = useState(0);
-  const [endIndex, setEndIndex] = useState(24);
   const [display, setDisplay] = useState([]);
+  const [displayCount, setDisplayCount] = useState(0);
 
-  // function UpdateDisplay(){
-  //   const tempArray = showData.splice(startIndex, endIndex)
-  //   setDisplay([...display, tempArray]);
-  // }
-
+  //Za trazlicu
 
   useEffect(() => {
     console.log("Data:",showData.length);
-    if(currentPage === 0 && !showData.length)
-      return;
     fetch(
       `https://api.tvmaze.com/shows?page=${currentPage}`
     ).then((res) => res.json())
     .then((data) => {
-      setShowData((prev) => [...prev, ...data]);
+      data.sort((first:any, second:any) => second.rating.average-first.rating.average);
+      setShowData((prev) => {
+        const noDuplicates = data.filter((show) => !prev.some((s)=> s.id === show.id));
+        return [...prev, ...noDuplicates];
+      });
       console.log("Show data:", data);
     })
     .catch((error) => console.log("showdata error", error))
@@ -37,15 +36,26 @@ export default function Home() {
 
   useEffect(() => {
     if (inView) {
-      setCurrentPage((prev)=> prev+1);
-      setStartIndex((prev) => prev+viewPerPage);
-      setEndIndex((prev)=> prev+viewPerPage);
+      if (displayCount < showData.length) {
+        const nextGroup = showData.slice(displayCount, displayCount + viewPerPage);
+        setDisplay((prev) => [...prev, ...nextGroup]);
+        setDisplayCount((prev) => prev + viewPerPage);
+      } else {
+        setCurrentPage((prev) => prev + 1);
+      }
     }
   }, [inView]);
 
-  useEffect(()=>{
-    setDisplay((prev) => [...prev, ...showData.slice(startIndex, endIndex)]);
-  }, [showData,startIndex, endIndex])
+  useEffect(() => {
+    const nextGroup = showData.slice(
+      displayCount,
+      displayCount + viewPerPage
+    );
+    if (nextGroup.length > 0) {
+      setDisplay((prev) => [...prev, ...nextGroup]);
+      setDisplayCount((prev) => prev + viewPerPage);
+    }
+  }, [showData]);
 
   return (
     <div className="">
@@ -60,7 +70,8 @@ export default function Home() {
           <div className="text-center">
             <SearchBar></SearchBar>
           </div>
-          <div className="grid grid-cols-4 mt-20 gap-10">
+          <div>
+            <div className="grid grid-cols-4 mt-20 gap-10">
             {display.map((s:any) => (
               <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
                 <ShowDisplay image={s.image.medium} name={s.name}></ShowDisplay>
