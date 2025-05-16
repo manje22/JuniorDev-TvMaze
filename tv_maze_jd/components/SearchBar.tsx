@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
@@ -34,7 +35,9 @@ export default function SearchBar() {
           <div className="absolute top-20 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
             {
               activeSearch.map((s) => (
-                <span key={s.id}>{s.show.name}</span>
+                <Link href={`/shows/${s.show.id}`} key={s.show.id}>
+                  {s.show.name}
+                </Link>
               ))
             }
           </div>
