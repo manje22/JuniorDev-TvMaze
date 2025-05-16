@@ -67,6 +67,8 @@ export default function Home() {
               </Link>
             ))}
           </div>
+          </div>
+          <ScrollToTopButton></ScrollToTopButton>
         </div>
         <div ref={ref}>
           Loading...
