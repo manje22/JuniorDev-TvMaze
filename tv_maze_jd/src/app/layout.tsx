@@ -28,15 +28,28 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="overflow-hidden bg-pink-200 p-5 shadow-blue-50 shadow-2xl">
-          <header>
-            <nav className="flex gap-10 text-2xl">
-              <Link href={'/'} className="hover:bg-white">Homepage</Link>
-              <Link href={'/favorites/favoriteShows'} className="hover:bg-white">Favorites</Link>
-              <Link href={'/actors'} className="hover:bg-white">Actors</Link>
-            </nav>
-          </header>
-        </div>
+        <header className="w-full px-8 py-3 shadow-sm shadow-neutral-50 flex items-center">
+          <nav className="flex justify-between items-center w-full">
+            <Link href={"/"} className="hover:bg-white">
+              Homepage
+            </Link>
+            <ul className="flex items-center gap-8">
+              <li>
+                <Link
+                  href={"/favorites/favoriteShows"}
+                  className="hover:bg-white"
+                >
+                  Favorites
+                </Link>
+              </li>
+              <li>
+                <Link href={"/actors"} className="hover:bg-white">
+                  Actors
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
         {children}
       </body>
     </html>
