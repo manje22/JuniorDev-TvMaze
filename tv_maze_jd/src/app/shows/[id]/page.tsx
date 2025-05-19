@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 import FavoriteButton from "../../../../components/FavoriteButton";
-
+import globe from "../../../../public/globe.svg";
 export default async function ShowDetails({ params }) {
   const { id } = await params;
   console.log("Id je: ", id);
@@ -58,7 +58,10 @@ export default async function ShowDetails({ params }) {
         {
           cast.map((c) => (
             <div key={c.person.id+c.character.id}>
-              <Image src={c.person.image.original} alt={c.person.name} width={100} height={100}></Image>
+              {
+                c.person.image ? (<Image src={c.person.image?.original} alt={c.person.name} width={100} height={100}></Image>) : (<Image src={globe} alt="no picture" height={100} width={100}></Image>)
+              }
+              
               <p>{c.person.name}</p>
               <p>plays: {c.character.name}</p>
             </div>
