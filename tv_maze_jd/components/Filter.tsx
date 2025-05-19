@@ -1,11 +1,62 @@
-export default function Filter() {
-    const filterValues = [];
-    return(
-        <div className="bg-slate-400">
-            <form>
-                <label htmlFor="genre">Genre:</label>
-                <input type=""></input>
-            </form>
-        </div>
-    )
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function Filter({chosenFilters, setChosenFilters}) {
+  const filterValues = [
+    "Drama",
+    "Crime",
+    "Mystery",
+    "Adventure",
+    "Supernatural",
+    "Action",
+    "Family",
+    "Romance",
+    "Science-fiction",
+    "Comedy",
+    "Fantasy",
+    "Horror",
+  ];
+
+
+    const addFilter = (filter) => {
+    if(!chosenFilters.includes(filter)){
+      setChosenFilters(prev => ([...prev, filter]))
+    }
+  }
+
+  const removeFilter = (filter) => {
+    if(chosenFilters.includes(filter)){
+      const removedList = chosenFilters.filter((item) => (item !== filter));
+      setChosenFilters(removedList);
+    }
+  }
+
+
+  return (
+    <div className="relative w-full h-[15%] flex items-center overflow-x-auto">
+      <span className="mx-3 ml-5 font-medium"> Categories: </span>
+      <div className="grid grid-cols-3 gap-3">
+        {filterValues.map((genre) => (
+          <div
+            key={genre}
+            onClick={() => {
+              if (chosenFilters.includes(genre)) {
+                removeFilter(genre);
+              } else {
+                addFilter(genre);
+              }
+            }}
+            className={`w-fit min-w-fit h-8 mx-2 px-5 py-2 justify-center items-center text-sm break-keep rounded-3xl cursor-pointer transition-all duration-300 ${
+              chosenFilters.includes(genre)
+                ? "border-blue-500 bg-blue-500 text-white"
+                : " border-gray-500 bg-blue-100 text-gray-900"
+            } `}
+          >
+            {genre.split("-").join(" ")}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
