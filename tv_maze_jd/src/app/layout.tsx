@@ -28,9 +28,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="w-full px-8 py-3 shadow-sm shadow-neutral-50 flex items-center">
+        <header className="w-full px-8 py-3 flex items-center shadow-2xl">
           <nav className="flex justify-between items-center w-full">
-            <Link href={"/"} className="hover:bg-white">
+            <Link href={"/"} className="h-full">
               Homepage
             </Link>
             <ul className="flex items-center gap-8">
