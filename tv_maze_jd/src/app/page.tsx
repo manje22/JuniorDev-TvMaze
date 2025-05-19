@@ -1,90 +1,125 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import ShowDisplay from "../../components/ShowDisplay";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0);
   const [showData, setShowData] = useState([]);
-  const {ref, inView} = useInView();
-  const viewPerPage = 24;
   const [display, setDisplay] = useState([]);
   const [displayCount, setDisplayCount] = useState(0);
-
-  //Za trazlicu
+  const [choosenFilters, setChoosenFilters] = useState<string[]>([]);
+  const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
+  const [isFetching, setIsFetching] = useState(false);
+  const { ref, inView } = useInView();
+  const viewPerPage = 24;
 
   useEffect(() => {
-    console.log("Data:",showData.length);
-    fetch(
-      `https://api.tvmaze.com/shows?page=${currentPage}`
-    ).then((res) => res.json())
-    .then((data) => {
-      data.sort((first:any, second:any) => second.rating.average-first.rating.average);
-      setShowData((prev) => {
-        const noDuplicates = data.filter((show) => !prev.some((s)=> s.id === show.id));
-        return [...prev, ...noDuplicates];
-      });
-      console.log("Show data:", data);
-    })
-    .catch((error) => console.log("showdata error", error))
+    //Sprijecava vise fetcha ako je npr. spor internet ili nesto drugo bloka
+    if (isFetching) return;
+    setIsFetching(true);
+
+    fetch(`https://api.tvmaze.com/shows?page=${currentPage}`)
+      .then((r) => r.json())
+      .then((data: any[]) => {
+        data.sort(
+          (a, b) => (b.rating?.average || 0) - (a.rating?.average || 0)
+        ); //sortiranje po popularnosti
+        setShowData((prev) => [
+          ...prev,
+          ...data.filter((s) => !prev.some((x) => x.id === s.id)), //filtriranje kako bi se pomoglo u sprijecavanju duplog rendiranja
+        ]);
+      })
+      .catch(console.error)
+      .finally(() => setIsFetching(false));
   }, [currentPage]);
 
-  useEffect(() => {
-    if (inView) {
-      if (displayCount < showData.length) {
-        const nextGroup = showData.slice(displayCount, displayCount + viewPerPage);
-        setDisplay((prev) => [...prev, ...nextGroup]);
-        setDisplayCount((prev) => prev + viewPerPage);
-      } else {
-        setCurrentPage((prev) => prev + 1);
+  const loadMore = useCallback(() => {
+    if (displayCount >= showData.length) {
+      if (!isFetching) {
+        setCurrentPage((p) => p + 1); //ako su prikazane sve dohvaćene serije dohvati sljedeću str
       }
+      return;
     }
-  }, [inView]);
 
+    //uzima se sljedeci niz serija, od zadnje prikazane plus jos 24 (view per page)
+    const nextSet = showData.slice(displayCount, displayCount + viewPerPage);
+
+    //filtriranje prikazanih serija ukoliko su postavljeni filteri
+    const nextFiltered =
+      appliedFilters.length === 0
+        ? nextSet
+        : nextSet.filter((show) =>
+            show.genres.some((g) => appliedFilters.includes(g))
+          );
+
+    //postavljanje sljedece serije u prikaz (display)
+    setDisplay((prev) => {
+      const seen = new Set(prev.map((s) => s.id)); //upotrebljen Set jer sadrži samo jedinstvene vrijednosti (pokušaj spriječavanja duplog dodavanja)
+      return [...prev, ...nextFiltered.filter((s) => !seen.has(s.id))];
+    });
+
+    //display count pomicemo na osnovi NEfiltriranih podataka
+    setDisplayCount((p) => p + nextSet.length);
+  }, [showData, displayCount, appliedFilters, isFetching]);
+
+  //ucitavanje jos serija ako se dode do kraja trenutnog prikaza
   useEffect(() => {
-    const nextGroup = showData.slice(
-      displayCount,
-      displayCount + viewPerPage
-    );
-    if (nextGroup.length > 0) {
-      setDisplay((prev) => [...prev, ...nextGroup]);
-      setDisplayCount((prev) => prev + viewPerPage);
-    }
-  }, [showData]);
+    if (inView) loadMore();
+  }, [inView, loadMore]);
+
+
+  //filtriranje serija
+  function handleApply() {
+    setDisplay([]);
+    setDisplayCount(0);
+    setAppliedFilters(choosenFilters);
+  }
+
+  function ClearFilters(e: Event) {
+    e.preventDefault();
+
+    console.log("Cleared filters");
+    setDisplay([]);
+    setDisplayCount(0);
+    setAppliedFilters([]);
+    setChoosenFilters([]);
+  }
 
   return (
-    <div className="">
-      <main className="flex flex-col">
-        <div className="text-center bg-blue-50 p-10">
-          <h1 className="text-5xl mb-8">Dobrodošli</h1>
-          <h2 className="text-3xl mb-10">
-            Ovdje možete pregledavati serije, epizode i glumce
-          </h2>
-        </div>
-        <div>
-          <div className="text-center">
-            <SearchBar></SearchBar>
-          </div>
-          <div>
-            <div className="grid grid-cols-4 mt-20 gap-10">
-            {display.map((s:any) => (
-              <Link href={`/shows/${s.id}`} key={s.id} className="w-fit m-auto" >
-                <ShowDisplay image={s.image.medium} name={s.name}></ShowDisplay>
-              </Link>
-            ))}
-          </div>
-          </div>
-          <ScrollToTopButton></ScrollToTopButton>
-        </div>
-        <div ref={ref}>
-          Loading...
-        </div>
-      </main>
-    </div>
+    <main className="flex flex-col">
+      <div className="flex space-x-4">
+        <SearchBar />
+        <Filter
+          chosenFilters={choosenFilters}
+          setChosenFilters={setChoosenFilters}
+        />
+        <button
+          onClick={handleApply}
+          className="px-4 py-2 bg-amber-600 hover:bg-amber-800 text-white rounded"
+        >
+          Apply
+        </button>
+        <button onClick={(e) => ClearFilters(e)}>Clear</button>
+      </div>
+      <div className="grid grid-cols-4 gap-10 mt-20">
+        {display.map((s) => (
+          <Link href={`/shows/${s.id}`} key={s.id}>
+            <ShowDisplay image={s.image?.medium} name={s.name} />
+          </Link>
+        ))}
+      </div>
+
+      <ScrollToTopButton />
+
+      <div ref={ref} className="py-10 text-center">
+        Loading more…
+      </div>
+    </main>
   );
 }
