@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function Filter({chosenFilters, setChosenFilters}) {
+export default function Filter({chosenFilters, setChosenFilters}: {chosenFilters:string[], setChosenFilters:CallableFunction}) {
   const filterValues = [
     "Drama",
     "Crime",
@@ -19,13 +19,13 @@ export default function Filter({chosenFilters, setChosenFilters}) {
   ];
 
 
-    const addFilter = (filter) => {
+    const addFilter = (filter:string) => {
     if(!chosenFilters.includes(filter)){
-      setChosenFilters(prev => ([...prev, filter]))
+      setChosenFilters((prev: any) => ([...prev, filter]))
     }
   }
 
-  const removeFilter = (filter) => {
+  const removeFilter = (filter: string) => {
     if(chosenFilters.includes(filter)){
       const removedList = chosenFilters.filter((item) => (item !== filter));
       setChosenFilters(removedList);
