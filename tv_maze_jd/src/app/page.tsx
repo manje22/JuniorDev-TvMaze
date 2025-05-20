@@ -7,17 +7,18 @@ import { useInView } from "react-intersection-observer";
 import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
+import { Show } from "./types";
 
 export default function Home() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [showData, setShowData] = useState([]);
-  const [display, setDisplay] = useState([]);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [showData, setShowData] = useState<Show[]>([]);
+  const [display, setDisplay] = useState<Show[]>([]);
   const [displayCount, setDisplayCount] = useState(0);
   const [choosenFilters, setChoosenFilters] = useState<string[]>([]);
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const { ref, inView } = useInView();
-  const viewPerPage = 24;
+  const viewPerPage:number = 24;
 
   useEffect(() => {
     //Sprijecava vise fetcha ako je npr. spor internet ili nesto drugo bloka
@@ -26,7 +27,7 @@ export default function Home() {
 
     fetch(`https://api.tvmaze.com/shows?page=${currentPage}`)
       .then((r) => r.json())
-      .then((data: any[]) => {
+      .then((data: Show[]) => {
         data.sort(
           (a, b) => (b.rating?.average || 0) - (a.rating?.average || 0)
         ); //sortiranje po popularnosti
@@ -81,7 +82,7 @@ export default function Home() {
     setAppliedFilters(choosenFilters);
   }
 
-  function ClearFilters(e: Event) {
+  function ClearFilters(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
     console.log("Cleared filters");
@@ -108,7 +109,7 @@ export default function Home() {
         <button onClick={(e) => ClearFilters(e)}>Clear</button>
       </div>
       <div className="grid grid-cols-4 gap-10 mt-20">
-        {display.map((s) => (
+        {display.map((s:Show) => (
           <Link href={`/shows/${s.id}`} key={s.id}>
             <ShowDisplay image={s.image?.medium} name={s.name} />
           </Link>

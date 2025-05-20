@@ -5,8 +5,14 @@ import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 import FavoriteButton from "../../../../components/FavoriteButton";
 import globe from "../../../../public/globe.svg";
-export default async function ShowDetails({ params }) {
-  const { id } = await params;
+import { Castmember, Show } from "@/app/types";
+
+type ShowDetailsParams = {
+  params: {id: string};
+};
+
+export default async function ShowDetails({ params }: ShowDetailsParams) {
+  const id  = parseInt(params.id, 10);
   console.log("Id je: ", id);
 
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
@@ -19,10 +25,10 @@ export default async function ShowDetails({ params }) {
   const showFav = {
     tvmaze_id: showData.id,
     name: showData.name,
-    image: showData.image.medium
+    image: showData.image?.medium
   };
 
-  const poster = showData.image.original;
+  const poster = showData.image?.original;
   const cast = showData._embedded.cast;
   console.log(cast);
 
@@ -46,7 +52,7 @@ export default async function ShowDetails({ params }) {
           <li>
             Genres:
             <div>
-              {showData.genres.map((g) => (
+              {showData.genres.map((g:string) => (
                 <p key={g}>{g}</p>
               ))}
             </div>
@@ -56,7 +62,7 @@ export default async function ShowDetails({ params }) {
       <div>
         <p>Cast</p>
         {
-          cast.map((c) => (
+          cast.map((c: Castmember) => (
             <div key={c.person.id+c.character.id}>
               {
                 c.person.image ? (<Image src={c.person.image?.original} alt={c.person.name} width={100} height={100}></Image>) : (<Image src={globe} alt="no picture" height={100} width={100}></Image>)
