@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NotFound from "./not-found";
 
 type Props ={
     params: {id:string};
@@ -13,7 +14,7 @@ export default async function EpisodeDetails({params}: Props) {
     const EpisodeDetails = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
 
     if (!EpisodeDetails.ok) {
-        throw new Error("Episode details not found");
+        return NotFound();
     }
 
     const episodeData = await EpisodeDetails.json();
