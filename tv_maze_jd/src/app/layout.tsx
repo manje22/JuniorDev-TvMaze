@@ -43,7 +43,7 @@ export default function RootLayout({
                 </Link>
               </li>
               <li>
-                <Link href={"/actors"} className="hover:bg-white">
+                <Link href={"/people"} className="hover:bg-white">
                   Actors
                 </Link>
               </li>
