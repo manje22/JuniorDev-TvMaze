@@ -18,7 +18,7 @@ export default async function ShowDetails({ params }: ShowDetailsParams) {
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
 
   if (!showRes.ok) {
-    throw new Error("Show not found");
+    return notFound();
   }
 
   const showData = await showRes.json();
