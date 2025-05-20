@@ -1,4 +1,5 @@
 import Image from "next/image";
+import NotFound from "./not-found";
 
 type Props ={
     params: {id:string};
@@ -13,7 +14,7 @@ export default async function ActorDetails({params}: Props) {
     const actorDetails = await fetch(`https://api.tvmaze.com/people/${actorId}?embed=castcredits`);
 
     if (!actorDetails.ok) {
-        throw new Error("Actor details not found");
+        return NotFound();
     }
 
     const actorData = await actorDetails.json();
