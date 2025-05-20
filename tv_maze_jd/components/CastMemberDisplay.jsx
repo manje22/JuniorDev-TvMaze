@@ -6,12 +6,15 @@ export default async function CastMemberDisplay({ person }) {
     return(
         <div>
             <div>
-                <Image src={data.image.medium} width={50} height={50} alt="image"></Image>
+                {data.image?.medium ? 
+                    <Image src={data.image?.medium} width={50} height={50} alt="image"></Image> :
+                    <div className="w-[50px] h-[50px] bg-black text-white">No Image</div>
+                }
             </div>
             <div>
-                <p>Name: {data.name}</p>
-                <p>Date of birth: {data.birthday}</p>
-                <p>Country of origin: {data.country.name}</p>
+                <p>Name: {data.name || "n/a"}</p>
+                <p>Date of birth: {data.birthday || "n/a"}</p>
+                <p>Country of origin: {data.country?.name || "n/a"}</p>
             </div>
         </div>
     )

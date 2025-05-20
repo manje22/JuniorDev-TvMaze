@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CastMemberDisplay from "../../../../../components/CastMemberDisplay"
-//make castMemdisplay
+
 
 type Props ={
     params: {id:string};
@@ -29,8 +29,8 @@ export default async function ShowCast({params}: Props) {
                 <h2>Cast:</h2>
                 <div>
                     {castData.map((person: any) => (
-                        <Link href={`../../people/${person.person.id}`}>
-                            <CastMemberDisplay key={person.person.id} person={person}></CastMemberDisplay>
+                        <Link href={`../../people/${person.person.id}`} key={person.character.id}>
+                            <CastMemberDisplay person={person}></CastMemberDisplay>
                         </Link>
                     ))}
                 </div>

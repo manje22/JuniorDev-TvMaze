@@ -26,7 +26,7 @@ export default async function ActorDetails({params}: Props) {
             </div>
             <div>
                 <p>Name: {actorData.name}</p>
-                <p>County: {actorData.country.name}</p>
+                <p>County: {actorData.country?.name || "n/a"}</p>
                 <p>Birthday: {actorData.birthday}</p>
             </div>
             <div>
