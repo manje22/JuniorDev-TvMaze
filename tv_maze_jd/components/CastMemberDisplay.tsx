@@ -1,8 +1,13 @@
 import Image from "next/image";
+import { Actor } from "@/app/types";
 
-export default async function CastMemberDisplay({ person }) {
-    const data = await person.person;
-    console.log(data);
+interface CastMemberDisplayProps {
+  person: Actor;
+}
+
+export default function CastMemberDisplay({ person }: CastMemberDisplayProps) {
+    const data = person;
+    console.log("Person: ", person);
     return(
         <div>
             <div>
