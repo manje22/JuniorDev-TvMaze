@@ -36,7 +36,7 @@ export default function RootLayout({
             <ul className="flex items-center gap-8">
               <li>
                 <Link
-                  href={"/favorites/favoriteShows"}
+                  href={"/favorites"}
                   className="hover:bg-white"
                 >
                   Favorites
