@@ -1,6 +1,14 @@
+"use client";
+
+import { useSessionContext } from "@/context/SessionContext";
 import Link from "next/link";
 
 export default function Favorites(){
+    const session = useSessionContext();
+    
+    if (!session?.user) {
+        return <p>Sign in to view and add favorites</p>
+    }
     return(
         <div>
             <div>
