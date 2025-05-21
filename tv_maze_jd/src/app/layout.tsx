@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { SignInBtn } from "../../components/SignInBtn";
+import { SignOutBtn } from "../../components/SignOutBtn";
+import { auth } from "./auth";
+import {SessionProvider} from "@/context/SessionContext";
+
 
 
 const geistSans = Geist({
@@ -36,10 +41,7 @@ export default function RootLayout({
             </Link>
             <ul className="flex items-center gap-8">
               <li>
-                <Link
-                  href={"/favorites"}
-                  className="hover:bg-white"
-                >
+                <Link href={"/favorites"} className="hover:bg-white">
                   Favorites
                 </Link>
               </li>
@@ -48,6 +50,15 @@ export default function RootLayout({
                   Actors
                 </Link>
               </li>
+              {session === null ? (
+                <li>
+                  <SignInBtn></SignInBtn>
+                </li>
+              ) : (
+                <li>
+                  <SignOutBtn></SignOutBtn>
+                </li>
+              )}
             </ul>
           </nav>
         </header>

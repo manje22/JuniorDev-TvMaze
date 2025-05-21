@@ -96,11 +96,6 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <div className="flex space-x-4">
-        <div>
-          {" "}
-          <p>You are not signed in</p>
-          <SignInBtn></SignInBtn>
-        </div>
         <SearchBar /> 
         <Filter
           chosenFilters={choosenFilters}
