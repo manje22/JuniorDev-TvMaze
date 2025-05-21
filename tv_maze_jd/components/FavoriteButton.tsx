@@ -1,16 +1,24 @@
 "use client";
 
 import { getShowbyId } from "@/app/db/statements";
+import { Show } from "@/app/types";
 import { useState, useTransition, useEffect } from "react";
+import { Interface } from "readline";
 
+type ShowDbEntity = {
+  tvmaze_id: number,
+  name: string,
+  image:string,
+}
 
-export default function FavoriteButton({show,initialSaved=false}) {
+export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEntity, initialSaved:boolean}) {
   const [saved, setSaved] = useState(initialSaved);
   const [isPending, startTransition] = useTransition();
   const [provjera, setProvjera] = useState(true); 
   const id = show.tvmaze_id
 
     useEffect(() => {
+      console.log("Show from favbtn: ",show);
       fetch(`http://localhost:3000/api/favorites/${id}`)
       .then((res) => res.json())
       .then((data) => {
