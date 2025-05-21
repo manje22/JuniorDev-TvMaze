@@ -74,7 +74,7 @@ export default async function ShowDetails({ params }: ShowDetailsParams) {
           ))
         }
       </div>
-      <FavoriteButton show={showFav}></FavoriteButton>
+      <FavoriteButton show={showFav} initialSaved={false}></FavoriteButton>
       <div>
         <Link href={`/shows/${id}/episodes`}>Click here to view episodes</Link>
       </div>

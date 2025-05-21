@@ -2,6 +2,7 @@
 
 import { getShowbyId } from "@/app/db/statements";
 import { useState, useTransition, useEffect } from "react";
+import { useSessionContext } from "@/context/SessionContext";
 
 type ShowDbEntity = {
   tvmaze_id: number,
@@ -12,10 +13,15 @@ type ShowDbEntity = {
 export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEntity, initialSaved:boolean}) {
   const [saved, setSaved] = useState(initialSaved);
   const [isPending, startTransition] = useTransition();
-  const [provjera, setProvjera] = useState(true); 
+  const [provjera, setProvjera] = useState(true);
+  const session = useSessionContext();
   const id = show.tvmaze_id
 
     useEffect(() => {
+      if (!session?.user) {
+        setProvjera(false);
+        return;
+      }
       console.log("Show from favbtn: ",show);
       fetch(`http://localhost:3000/api/favorites/${id}`)
       .then((res) => res.json())
@@ -50,7 +56,11 @@ export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEn
       <button className="px-3 py-1 rounded bg-gray-300 text-gray-600" disabled>
         Provjera...
       </button>
-    );
+  );
+
+  if (!session?.user) {
+    return <div></div>;
+  }
 
 
   return (
