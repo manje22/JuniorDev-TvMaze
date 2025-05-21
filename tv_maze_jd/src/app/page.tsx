@@ -8,6 +8,7 @@ import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import { Show } from "./types";
+import { SignInBtn } from "../../components/SignInBtn";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -95,7 +96,12 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <div className="flex space-x-4">
-        <SearchBar />
+        <div>
+          {" "}
+          <p>You are not signed in</p>
+          <SignInBtn></SignInBtn>
+        </div>
+        <SearchBar /> 
         <Filter
           chosenFilters={choosenFilters}
           setChosenFilters={setChoosenFilters}
@@ -109,7 +115,7 @@ export default function Home() {
         <button onClick={(e) => ClearFilters(e)}>Clear</button>
       </div>
       <div className="grid grid-cols-4 gap-10 mt-20">
-        {display.map((s:Show) => (
+        {display.map((s: Show) => (
           <Link href={`/shows/${s.id}`} key={s.id}>
             <ShowDisplay image={s.image?.medium} name={s.name} />
           </Link>

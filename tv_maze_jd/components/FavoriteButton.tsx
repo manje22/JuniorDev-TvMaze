@@ -1,9 +1,7 @@
 "use client";
 
 import { getShowbyId } from "@/app/db/statements";
-import { Show } from "@/app/types";
 import { useState, useTransition, useEffect } from "react";
-import { Interface } from "readline";
 
 type ShowDbEntity = {
   tvmaze_id: number,
