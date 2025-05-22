@@ -2,9 +2,11 @@
 
 import { getShowbyId } from "@/app/db/statements";
 import { useState, useTransition, useEffect } from "react";
+import { useSessionContext } from "@/context/SessionContext";
 
 export default function DeleteButton({id, OnDelete}:{id:string; OnDelete:()=> void;}) {
   const [isPending, startTransition] = useTransition();
+  const session = useSessionContext();
 
 
 
@@ -14,6 +16,7 @@ export default function DeleteButton({id, OnDelete}:{id:string; OnDelete:()=> vo
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         tvmaze_id: id,
+        user_mail: session?.user?.email,
       }),
     });
 

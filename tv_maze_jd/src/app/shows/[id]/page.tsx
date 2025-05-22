@@ -1,4 +1,5 @@
 import { error } from "console";
+import {auth} from "@/app/auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,8 @@ type ShowDetailsParams = {
 export default async function ShowDetails({ params }: ShowDetailsParams) {
   const id  = parseInt(params.id, 10);
   console.log("Id je: ", id);
+  const session = await auth();
+  console.log("session from showDisplay: ",session);
 
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
 
@@ -24,6 +27,7 @@ export default async function ShowDetails({ params }: ShowDetailsParams) {
   const showData = await showRes.json();
   const showFav = {
     tvmaze_id: showData.id,
+    user_mail: session?.user?.email,
     name: showData.name,
     image: showData.image?.medium
   };

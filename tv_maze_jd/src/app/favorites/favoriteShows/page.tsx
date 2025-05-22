@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import DeleteButton from "../../../../components/DeleteButton";
 import ShowDisplay from "../../../../components/ShowDisplay";
+import { useSessionContext } from "@/context/SessionContext";
 
 type Props ={
     params: {id:string};
@@ -16,7 +17,7 @@ type Show ={
 
 export default function ShowFavorites({ params }: Props) {
   const [favorites, setFavorites] = useState([]);
-
+  const session = useSessionContext();
   useEffect(()=>{
     try {
       GetFavorites();
@@ -26,7 +27,7 @@ export default function ShowFavorites({ params }: Props) {
   }, [])
 
   async function GetFavorites() {
-    const res = await fetch("http://localhost:3000/api/favorites");
+    const res = await fetch(`http://localhost:3000/api/favorites?user_mail=${session?.user?.email}`);
 
     const favoritesRes = await res.json();
     setFavorites(favoritesRes);
