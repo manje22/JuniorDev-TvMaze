@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Show } from "@/app/types";
+import { Show } from "@/types";
 
 type Result = {
   score:number;

@@ -13,7 +13,7 @@ export default async function EpisodeDetails({params}: MyProps) {
     if (!EpisodeDetails.ok) {
         return NotFound();
     }
-
+    
     const episodeData = await EpisodeDetails.json();
     console.log(episodeData);
 

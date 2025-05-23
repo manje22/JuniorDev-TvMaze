@@ -7,8 +7,7 @@ import { useInView } from "react-intersection-observer";
 import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
-import { Show } from "./types";
-import { SignInBtn } from "../../components/SignInBtn";
+import { Show } from "../types";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState<number>(0);

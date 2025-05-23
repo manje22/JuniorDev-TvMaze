@@ -1,8 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import DeleteButton from "../../../../components/DeleteButton";
-import ShowDisplay from "../../../../components/ShowDisplay";
 import { useSessionContext } from "@/context/SessionContext";
 import Image from "next/image";
 import DeleteActor from "../../../../components/DeleteActor";
@@ -14,9 +12,10 @@ type Actor ={
   image: string;
 }
 
-export default function ActorFavorites({ params }: Props) {
+export default function ActorFavorites() {
   const [favorites, setFavorites] = useState([]);
   const session = useSessionContext();
+
   useEffect(()=>{
     try {
       GetFavorites();

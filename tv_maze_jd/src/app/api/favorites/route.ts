@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { insertNewShow, getShowbyId, getShows, deleteShow, } from "../../db/statements";
+import { insertNewShow, getShows, deleteShow, } from "../../db/statements";
 
  
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const mail = url.searchParams.get("user_mail");
   console.log("mail from get favs: ", mail);

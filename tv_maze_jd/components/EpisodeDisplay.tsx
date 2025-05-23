@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-export default async function EpisodeDisplay({ episode }) {
+interface Episode {
+    name: string;
+    airdate: string;
+    image:{
+        medium: string;
+        original: string;
+    };
+}
+export default async function EpisodeDisplay({ episode }: {episode: Episode}) {
     const data = await episode;
     return(
         <div>

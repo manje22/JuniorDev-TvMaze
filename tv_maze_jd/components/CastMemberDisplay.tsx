@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Actor } from "@/app/types";
+import { Actor } from "@/types";
 
 interface CastMemberDisplayProps {
   person: Actor;

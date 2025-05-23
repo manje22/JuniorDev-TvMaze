@@ -12,9 +12,10 @@ type Show ={
   image: string;
 }
 
-export default function ShowFavorites({ params }: Props) {
+export default function ShowFavorites() {
   const [favorites, setFavorites] = useState([]);
   const session = useSessionContext();
+  
   useEffect(()=>{
     try {
       GetFavorites();
