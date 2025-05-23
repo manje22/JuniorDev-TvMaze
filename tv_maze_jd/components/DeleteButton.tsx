@@ -6,7 +6,7 @@ import { useSessionContext } from "@/context/SessionContext";
 
 
 
-export default function DeleteButton({id, OnDelete}:{id:string; OnDelete:()=> void;}) {
+export default function DeleteButton({id, OnDelete}:{id:number; OnDelete:()=> void;}) {
   const [isPending, startTransition] = useTransition();
   const session = useSessionContext();
 
