@@ -1,15 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useSessionContext } from "@/context/SessionContext"; 
 import DeleteActor from "../../../../components/DeleteActor";
-import { Actor } from "@/types";
-import CastMemberDisplay from "../../../../components/CastMemberDisplay";
+import { CastMemberDisplayProps } from "@/types";
+import GetData from "@/utils/GetData";
 
 
 export default function ActorFavorites() {
   const [favorites, setFavorites] = useState([]);
   const session = useSessionContext();
+  const url = `http://localhost:3000/api/actors?user_mail=${session?.user?.email}`;
 
   useEffect(() => {
     try {
@@ -20,21 +22,29 @@ export default function ActorFavorites() {
   }, []);
 
   async function GetFavorites() {
-    const res = await fetch(
-      `http://localhost:3000/api/actors?user_mail=${session?.user?.email}`
-    );
-
-    const favoritesRes = await res.json();
-    setFavorites(favoritesRes);
+    const favoritesRes = await GetData(url);
+    if (!favoritesRes) {
+      throw new Error("Problem getting favorite actors");
+    }else
+      setFavorites(favoritesRes);
     console.log("favorite Actors", favoritesRes);
   }
 
   return (
     <div>
-      {favorites.map((f: Actor) => [
-        <div key={f.id}>
-          <CastMemberDisplay person={f}></CastMemberDisplay>
-          <DeleteActor id={f.id} OnDelete={GetFavorites}></DeleteActor>
+      {favorites.map((f: CastMemberDisplayProps) => [
+        <div key={f.tvmaze_id}>
+          <div>
+            {f.image ? (
+              <Image src={f.image} width={50} height={50} alt="image"></Image>
+            ) : (
+              <div className="w-[50px] h-[50px] bg-black text-white">
+                No Image
+              </div>
+            )}
+          </div>
+          <div>{f.name}</div>
+          <DeleteActor id={f.tvmaze_id} OnDelete={GetFavorites}></DeleteActor>
         </div>,
       ])}
     </div>
