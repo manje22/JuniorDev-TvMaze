@@ -1,0 +1,9 @@
+export default async function GetData(url:string) {
+    const res = await fetch(url);
+
+    if (!res.ok) {
+        return undefined;
+    }
+    const data = await res.json();
+    console.log("Get data ", data);
+  }
