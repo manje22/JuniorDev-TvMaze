@@ -1,11 +1,9 @@
 import Link from "next/link";
 import EpisodeDisplay from "../../../../../components/EpisodeDisplay";
+import { MyProps } from "@/types";
 
-type Props ={
-    params: {id:string};
-};
 
-export default async function ShowEpisodes({params}: Props) {
+export default async function ShowEpisodes({params}: MyProps) {
     const id = params.id;
     console.log(id,"hello from episode page");
     
