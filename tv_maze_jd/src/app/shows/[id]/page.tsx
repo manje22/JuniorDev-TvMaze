@@ -6,13 +6,11 @@ import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 import FavoriteButton from "../../../../components/FavoriteButton";
 import globe from "../../../../public/globe.svg";
-import { Castmember, Show } from "@/app/types";
+import { Castmember, MyProps } from "@/types";
 
-type ShowDetailsParams = {
-  params: {id: string};
-};
 
-export default async function ShowDetails({ params }: ShowDetailsParams) {
+
+export default async function ShowDetails({ params }: MyProps) {
   const id  = parseInt(params.id, 10);
   console.log("Id je: ", id);
   const session = await auth();

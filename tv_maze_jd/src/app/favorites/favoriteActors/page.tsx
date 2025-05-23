@@ -7,10 +7,7 @@ import { useSessionContext } from "@/context/SessionContext";
 import Image from "next/image";
 import DeleteActor from "../../../../components/DeleteActor";
 
-type Props ={
-    params: {id:string};
-};
-
+//not really good
 type Actor ={
   tvmaze_id : string;
   name: string;

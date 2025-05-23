@@ -1,12 +1,9 @@
 import Image from "next/image";
 import NotFound from "./not-found";
-
-type Props ={
-    params: {id:string};
-};
+import { MyProps } from "@/types";
 
 
-export default async function EpisodeDetails({params}: Props) {
+export default async function EpisodeDetails({params}: MyProps) {
     const epId = params.id;
     console.log(epId,"hello from episode detail page");
     

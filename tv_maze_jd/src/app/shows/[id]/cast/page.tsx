@@ -1,13 +1,8 @@
 import Link from "next/link";
 import CastMemberDisplay from "../../../../../components/CastMemberDisplay"
-import { Castmember } from "@/app/types";
+import { Castmember, MyProps } from "@/types";
 
-
-type Props ={
-    params: {id:string};
-};
-
-export default async function ShowCast({params}: Props) {
+export default async function ShowCast({params}: MyProps) {
     const id = params.id;
     console.log(id,"hello from cast page");
     
@@ -20,6 +15,7 @@ export default async function ShowCast({params}: Props) {
 
     const castData = await castRes.json();
     console.log("Cast data:", castData);
+
     return(
         <div>
             <div>

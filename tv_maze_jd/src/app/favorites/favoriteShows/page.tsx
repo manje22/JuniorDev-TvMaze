@@ -5,9 +5,6 @@ import DeleteButton from "../../../../components/DeleteButton";
 import ShowDisplay from "../../../../components/ShowDisplay";
 import { useSessionContext } from "@/context/SessionContext";
 
-type Props ={
-    params: {id:string};
-};
 
 type Show ={
   tvmaze_id : string;

@@ -4,12 +4,9 @@ import ActorFavorite from "../../../../components/ActorFavorite";
 import { useSessionContext } from "@/context/SessionContext";
 import notFound from "./not-found";
 import { auth } from "@/app/auth";
+import { MyProps } from "@/types";
 
-type Props = {
-  params: { id: string };
-};
-
-export default async function ActorDetails({ params }: Props) {
+export default async function ActorDetails({ params }: MyProps) {
   const id = parseInt(params.id, 10);
   console.log(id, "hello from actor detail page");
 
@@ -31,6 +28,7 @@ export default async function ActorDetails({ params }: Props) {
   }
 
   const actorData = await actorDetails.json();
+
   const actorFav = {
     tvmaze_id: actorData.id,
     user_mail: session?.user?.email,
