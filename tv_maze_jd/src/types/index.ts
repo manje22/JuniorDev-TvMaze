@@ -6,3 +6,4 @@ export * from "./show";
 export * from "./castmember";
 export * from "./myProps";
 export * from "./ShowDb";
+export * from "./actorDb";

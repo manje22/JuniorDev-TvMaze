@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useSessionContext } from "@/context/SessionContext"; 
 import DeleteActor from "../../../../components/DeleteActor";
-import { CastMemberDisplayProps } from "@/types";
+import { ActorDb } from "@/types";
 import GetData from "@/utils/GetData";
 
 
@@ -32,7 +32,7 @@ export default function ActorFavorites() {
 
   return (
     <div>
-      {favorites.map((f: CastMemberDisplayProps) => [
+      {favorites.map((f: ActorDb) => [
         <div key={f.tvmaze_id}>
           <div>
             {f.image ? (
