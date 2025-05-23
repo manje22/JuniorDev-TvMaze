@@ -6,4 +6,5 @@ export default async function GetData(url:string) {
     }
     const data = await res.json();
     console.log("Get data ", data);
+    return data;
   }
