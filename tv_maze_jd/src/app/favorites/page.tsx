@@ -1,14 +1,14 @@
-"use client";
 
-import { useSessionContext } from "@/context/SessionContext";
+import {auth} from "@/app/auth";
 import Link from "next/link";
 
-export default function Favorites(){
-    const session = useSessionContext();
+export default async function Favorites(){
+    const session = await auth();
     
-    if (!session?.user) {
+    if (!session?.user) {//make comp
         return <p>Sign in to view and add favorites</p>
     }
+
     return(
         <div>
             <div>
