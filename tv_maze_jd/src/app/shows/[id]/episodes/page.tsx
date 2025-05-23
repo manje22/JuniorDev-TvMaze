@@ -1,37 +1,32 @@
 import Link from "next/link";
 import EpisodeDisplay from "../../../../../components/EpisodeDisplay";
 import { MyProps } from "@/types";
+import GetData from "@/utils/GetData";
 
 
 export default async function ShowEpisodes({params}: MyProps) {
-    const id = params.id;
-    console.log(id,"hello from episode page");
     
+    const id = params.id;
+    const url = `https://api.tvmaze.com/shows/${id}/episodes`;
 
-    const episodesRes = await fetch(`https://api.tvmaze.com/shows/${id}/episodes`);
-
-    if (!episodesRes.ok) {
-        throw new Error("Episode list not found");
-    }
-
-    const episodeData = await episodesRes.json();
-    console.log(episodeData);
-    return(
+    const episodeData = await GetData(url);
+    if (!episodeData) throw new Error("Episode list not found");
+    
+    
+    return (
+      <div>
         <div>
-            <div>
-                <p>Ode ce ic slika</p>
-                <h1>Naziv serije</h1>
-            </div>
-            <div>
-                <h2>Episodes:</h2>
-                <div>
-                    {episodeData.map((episode: any) => (
-                        <Link href={`../../episodes/${episode.id}`}>
-                            <EpisodeDisplay key={episode.id} episode={episode}></EpisodeDisplay>
-                        </Link>
-                    ))}
-                </div>
-            </div>
+          <h2>Episodes:</h2>
+          <div>
+            {episodeData.map((episode: any) => (
+              <div key={episode.id}>
+                <Link href={`../../episodes/${episode.id}`}>
+                  <EpisodeDisplay episode={episode}></EpisodeDisplay>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-    )
+      </div>
+    );
 }

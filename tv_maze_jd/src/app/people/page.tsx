@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 import ScrollToTopButton from "../../../components/ScrollToTopButton";
-import { Actor, Character } from "../../types";
+import { Actor } from "../../types";
 import CastMemberDisplay from "../../../components/CastMemberDisplay";
 
 export default function PeoplePage() {
