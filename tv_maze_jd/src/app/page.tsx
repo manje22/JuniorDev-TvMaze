@@ -18,7 +18,7 @@ export default function Home() {
   const [appliedFilters, setAppliedFilters] = useState<string[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const { ref, inView } = useInView();
-  const viewPerPage:number = 24;
+  const viewPerPage: number = 24;
 
   useEffect(() => {
     //Sprijecava vise fetcha ako je npr. spor internet ili nesto drugo bloka
@@ -74,7 +74,6 @@ export default function Home() {
     if (inView) loadMore();
   }, [inView, loadMore]);
 
-
   //filtriranje serija
   function handleApply() {
     setDisplay([]);
@@ -85,7 +84,6 @@ export default function Home() {
   function ClearFilters(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    console.log("Cleared filters");
     setDisplay([]);
     setDisplayCount(0);
     setAppliedFilters([]);
@@ -95,7 +93,7 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <div className="flex space-x-4">
-        <SearchBar /> 
+        <SearchBar />
         <Filter
           chosenFilters={choosenFilters}
           setChosenFilters={setChoosenFilters}

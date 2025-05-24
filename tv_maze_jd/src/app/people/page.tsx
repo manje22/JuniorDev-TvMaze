@@ -25,7 +25,6 @@ export default function PeoplePage() {
     fetch(`https://api.tvmaze.com/people?page=${currentPage}`)
       .then((r) => r.json())
       .then((data: Actor[]) => {
-        console.log("Fetched data: ",data);
         setActorData((prev) => [
           ...prev,
           ...data.filter((s) => !prev.some((x) => x.id === s.id)), //filtriranje kako bi se pomoglo u sprijecavanju duplog rendiranja
@@ -45,7 +44,6 @@ export default function PeoplePage() {
 
     //uzima se sljedeci niz serija, od zadnje prikazane plus jos 24 (view per page)
     const nextSet = ActorData.slice(displayCount, displayCount + viewPerPage);
-    console.log("Next set: ", nextSet);
 
     //postavljanje sljedece serije u prikaz (display)
     setDisplay((prev) => {
@@ -59,7 +57,6 @@ export default function PeoplePage() {
 
   //ucitavanje jos serija ako se dode do kraja trenutnog prikaza
   useEffect(() => {
-    console.log("In view!!!");
     if (inView) loadMore();
   }, [inView, loadMore]);
 

@@ -11,10 +11,9 @@ import { Castmember, MyProps } from "@/types";
 
 
 export default async function ShowDetails({ params }: MyProps) {
+  
   const id  = parseInt(params.id, 10);
-  console.log("Id je: ", id);
   const session = await auth();
-  console.log("session from showDisplay: ",session);
 
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
 
@@ -32,7 +31,7 @@ export default async function ShowDetails({ params }: MyProps) {
 
   const poster = showData.image?.original;
   const cast = showData._embedded.cast;
-  console.log(cast);
+
 
   return (
     <div>

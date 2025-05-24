@@ -5,8 +5,6 @@ import { MyProps } from "@/types";
 
 export default async function EpisodeDetails({params}: MyProps) {
     const epId = params.id;
-    console.log(epId,"hello from episode detail page");
-    
 
     const EpisodeDetails = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
 
@@ -15,7 +13,6 @@ export default async function EpisodeDetails({params}: MyProps) {
     }
     
     const episodeData = await EpisodeDetails.json();
-    console.log(episodeData);
 
     return(
         <div>

@@ -27,7 +27,6 @@ export default function ActorFavorites() {
       throw new Error("Problem getting favorite actors");
     }else
       setFavorites(favoritesRes);
-    console.log("favorite Actors", favoritesRes);
   }
 
   return (

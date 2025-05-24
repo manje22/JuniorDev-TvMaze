@@ -28,7 +28,6 @@ export default function ShowFavorites() {
       throw new Error("Problem getting favorites");
     else
       setFavorites(favoritesRes);
-    console.log("favorite shows", favoritesRes);
   }
 
 
