@@ -1,9 +1,16 @@
 import { getShowById } from "@/app/db/statements";
 import { NextRequest, NextResponse } from "next/server";
 
+
+type Context = {
+  params: {
+    id: string;
+  };
+};
+
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: Context
 ) {
   const id = Number(params.id);
   const url = new URL(req.url);
