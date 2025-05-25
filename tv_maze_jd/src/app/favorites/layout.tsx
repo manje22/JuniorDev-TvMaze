@@ -1,10 +1,10 @@
 import { MyProps } from "@/types";
 
-export async function generateMetadata({ params }: MyProps) {
+export async function generateMetadata() {
  
   return {
-    title: `Tv encyclopedia │ favorite shows`,
-    description: `Your favorite shows`,
+    title: `Tv encyclopedia │ Favorites`,
+    description: `Browse favorites`,
   };
 }
 
