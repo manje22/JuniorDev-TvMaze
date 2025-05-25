@@ -1,4 +1,3 @@
-import { MyProps } from "@/types";
 
 export async function generateMetadata() {
  
@@ -10,11 +9,9 @@ export async function generateMetadata() {
 
 
 export default async function FavoritesLayout({
-  children,
-  params,
+  children
 }: {
-  children: React.ReactNode;
-  params: { id: string };
+  children: React.ReactNode
 }) {
 
   return (

@@ -6,5 +6,6 @@ export interface Episode{
     season: number;
     number: number;
     summary: string;
-    image?:Image
+    image?:Image;
+    airdate:string;
 }

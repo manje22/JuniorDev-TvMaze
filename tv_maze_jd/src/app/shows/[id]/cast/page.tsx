@@ -19,7 +19,7 @@ export default async function ShowCast({ params }: MyProps) {
         <h2 className="text-7xl text-center mb-5 mt-10">Cast</h2>
         <div className="grid grid-cols-3">
           {castData.map((person: Castmember) => (
-            <div className="w-fit h-fit mb-10 m-auto shadow-2xl" key={person.character.id+person.person.id}> //The key is a combination because the values seem to be repeating otherwise and errors arise
+            <div className="w-fit h-fit mb-10 m-auto shadow-2xl" key={person.character.id+person.person.id}>
               <Link
                 href={`../../people/${person.person.id}`}
               >

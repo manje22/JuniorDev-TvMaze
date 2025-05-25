@@ -1,5 +1,5 @@
 import { getActorById } from "@/app/db/statements";
-import { NextRequest } from "next/server";
+
 
 export async function GET(
   req: Request,

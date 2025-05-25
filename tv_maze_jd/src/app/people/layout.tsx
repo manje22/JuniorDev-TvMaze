@@ -1,4 +1,3 @@
-import { MyProps } from "@/types";
 
 export async function generateMetadata() {
  
