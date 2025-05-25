@@ -6,6 +6,26 @@ import { MyProps } from "@/types";
 import GetData from "@/utils/GetData";
 import BackButton from "../../../../components/BackButton";
 
+
+export async function generateMetadata({ params }: MyProps) {
+  const  id  = parseInt(params.id, 10);
+  const res = await fetch(`https://api.tvmaze.com/people/${id}?embed=castcredits`);
+  if (!res.ok) return { title: "Actor not found" };
+ 
+  const data = await res.json();
+ 
+  const image = data.image.medium;
+ 
+  return {
+    title: `Tv encyclopedia │ ${data.name}`,
+    description: `${data.name} details`,
+    openGraph: {
+      images: [{ url: image, width: 400, height: 400 }],
+    }
+  };
+}
+
+
 export default async function ActorDetails({ params }: MyProps) {
   const session = await auth();
 
