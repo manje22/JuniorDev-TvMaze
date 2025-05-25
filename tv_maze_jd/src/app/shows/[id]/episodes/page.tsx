@@ -3,9 +3,17 @@ import EpisodeDisplay from "../../../../../components/EpisodeDisplay";
 import GetData from "@/utils/GetData";
 import ScrollToTopButton from "../../../../../components/ScrollToTopButton";
 
+interface Episode {
+  id: string;
+  name: string;
+  airdate: string;
+  image: {
+    medium: string;
+    original: string;
+  };
+}
 
-
-export default async function ActorDetails({
+export default async function EpisodeGrid({
   params,
 }: {
   params: Promise<{id:string}>

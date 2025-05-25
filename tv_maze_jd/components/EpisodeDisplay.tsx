@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 interface Episode {
+    id:string;
     name: string;
     airdate: string;
     image:{
@@ -8,6 +9,7 @@ interface Episode {
         original: string;
     };
 }
+
 export default async function EpisodeDisplay({ episode }: {episode: Episode}) {
     const data = await episode;
     return(
