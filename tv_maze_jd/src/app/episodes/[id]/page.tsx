@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 
-export default async function EpisodeDetails(props:any) {
+export default async function EpisodeDetails(props:unknown) {
   const epId = props.id;
 
   const response = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
