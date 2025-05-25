@@ -1,11 +1,12 @@
-import { getActorbyId } from "@/app/db/statements";
+import { getActorById } from "@/app/db/statements";
 import { NextRequest } from "next/server";
 
 export async function GET(
-  req: NextRequest,
-  { params }: { params: { id: string } }
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = Number(params.id);
+  const resolvedParams = await params;
+  const id = Number(resolvedParams.id);
 
   const url = new URL(req.url);
   const mail = url.searchParams.get("user_mail");
@@ -17,14 +18,22 @@ export async function GET(
     );
   }
 
-  const show = getActorbyId(id, mail);
+  try {
+    const actor = await getActorById(id, mail);
 
-  if (!show) {
+    if (!actor) {
+      return new Response(
+        JSON.stringify({ message: "Actor not in favorites", status: 404 }),
+        { status: 404 }
+      );
+    }
+
+    return new Response(JSON.stringify(actor), { status: 200 });
+  } catch (error) {
+    console.error("Error fetching actor:", error);
     return new Response(
-      JSON.stringify({ message: "Actor not in favorites", status: 404 }),
-      { status: 404 }
+      JSON.stringify({ message: "Internal server error", status: 500 }),
+      { status: 500 }
     );
   }
-
-  return new Response(JSON.stringify(show), { status: 200 });
 }
