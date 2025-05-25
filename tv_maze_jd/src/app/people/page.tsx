@@ -8,6 +8,7 @@ import ScrollToTopButton from "../../../components/ScrollToTopButton";
 import { Actor } from "../../types";
 import CastMemberDisplay from "../../../components/CastMemberDisplay";
 
+//stranica koja prikazuje sve glumce 
 //ovdje za učitavanje još glumaca je upotrebljena ista logika kao i kod serija
 
 export default function PeoplePage() {

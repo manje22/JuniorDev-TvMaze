@@ -2,7 +2,7 @@ import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 
 
-
+//layout koji sadrzi izbornik s poveznicama na stranice z prikaz glumaca odabrane serije, epizode i serije u favoritima
 
 export async function generateMeta({
   params,

@@ -2,6 +2,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
+
+//stranica za detaljan prikaz epizode
 export default async function EpisodeDetails({
   params,
 }: {

@@ -3,6 +3,7 @@ import {auth} from "@/app/auth";
 import Link from "next/link";
 import Image from "next/image";
 
+//stranica koja sluzi kao izbornik za favorite
 
 export default async function Favorites(){
     const session = await auth();

@@ -4,6 +4,9 @@ import { Castmember} from "@/types";
 import GetData from "@/utils/GetData";
 import ScrollToTopButton from "../../../../../components/ScrollToTopButton";
 
+
+//stranica za prikaz glumaca serije
+
 export default async function ActorDetails({
   params,
 }: {

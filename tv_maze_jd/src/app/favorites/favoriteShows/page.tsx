@@ -8,6 +8,7 @@ import { ShowDb } from "@/types";
 import GetData from "@/utils/GetData";
 
 
+//stranica koja prikazuje serije u favoritima
 
 export default function ShowFavorites() {
   const [favorites, setFavorites] = useState<ShowDb[]>([]);

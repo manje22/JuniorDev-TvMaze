@@ -7,6 +7,8 @@ import DeleteActor from "../../../../components/DeleteActor";
 import { ActorDb } from "@/types";
 import GetData from "@/utils/GetData";
 
+//stranica koja prikazuje glumce u favoritima
+
 export default function ActorFavorites() {
   const [favorites, setFavorites] = useState([]);
   const session = useSessionContext();

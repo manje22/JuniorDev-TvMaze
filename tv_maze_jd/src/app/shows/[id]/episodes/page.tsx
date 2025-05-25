@@ -13,6 +13,8 @@ interface Episode {
   };
 }
 
+//stranica za prikaz epizoda serije
+
 export default async function EpisodeGrid({
   params,
 }: {

@@ -5,6 +5,7 @@ import GetData from "@/utils/GetData";
 import BackButton from "../../../../components/BackButton";
 import { auth } from "@/app/auth";
 
+//stranica za detaljan prikaz glumaca
 
 export default async function ActorDetails({
   params,
