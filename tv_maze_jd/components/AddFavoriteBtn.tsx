@@ -1,15 +1,15 @@
 "use client";
 
+
+//Ovo je gumb koji provjerava i dodaje prikazanu seriju u favorite ukoliko nije već dodana
+
+
 import { useState, useTransition, useEffect } from "react";
 import { useSessionContext } from "@/context/SessionContext";
+import { ShowDb } from "@/types";
 
-type ShowDbEntity = {
-  tvmaze_id: number,
-  name: string,
-  image:string,
-}
 
-export default function AddFavoriteButton({show,initialSaved=false}:{show: ShowDbEntity, initialSaved:boolean}) {
+export default function AddFavoriteButton({show,initialSaved=false}:{show: ShowDb, initialSaved:boolean}) {
   const [saved, setSaved] = useState(initialSaved);
   const [isPending, startTransition] = useTransition();
   const [provjera, setProvjera] = useState(true);
@@ -40,7 +40,7 @@ export default function AddFavoriteButton({show,initialSaved=false}:{show: ShowD
 
   async function addFavorite() {
     startTransition(async () => {
-      const res = await fetch(`http://localhost:3000/api/favorites`, { //opet možemo poslat url
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, { //opet možemo poslat url
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({tvmaze_id: show.tvmaze_id, user_mail: user_email, name:show.name, image: show.image}), //prilagodit cemo

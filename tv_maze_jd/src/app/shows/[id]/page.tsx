@@ -1,4 +1,3 @@
-import { error } from "console";
 import {auth} from "@/app/auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";

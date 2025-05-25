@@ -10,7 +10,7 @@ import GetData from "@/utils/GetData";
 export default function ActorFavorites() {
   const [favorites, setFavorites] = useState([]);
   const session = useSessionContext();
-  const url = `http://localhost:3000/api/actors?user_mail=${session?.user?.email}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/actors?user_mail=${session?.user?.email}`;
 
   useEffect(() => {
     try {

@@ -12,7 +12,7 @@ export default function DeleteActor({id, OnDelete}:{id:number; OnDelete:()=> voi
 
 
   async function removeFavorite() {
-    const res = await fetch("/api/actors", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/actors`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

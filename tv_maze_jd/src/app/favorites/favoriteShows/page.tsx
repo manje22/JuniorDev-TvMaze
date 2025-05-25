@@ -12,7 +12,7 @@ import GetData from "@/utils/GetData";
 export default function ShowFavorites() {
   const [favorites, setFavorites] = useState<ShowDb[]>([]);
   const session = useSessionContext();
-  const url = `http://localhost:3000/api/favorites?user_mail=${session?.user?.email}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites?user_mail=${session?.user?.email}`;
   
   useEffect(()=>{
     try {

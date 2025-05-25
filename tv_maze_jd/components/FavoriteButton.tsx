@@ -39,7 +39,7 @@ export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEn
 
   async function addFavorite() {
     startTransition(async () => {
-      const res = await fetch(`http://localhost:3000/api/favorites`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}api/favorites`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({tvmaze_id: show.tvmaze_id, user_mail: user_email, name:show.name, image: show.image}),

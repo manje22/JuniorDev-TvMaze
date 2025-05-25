@@ -120,7 +120,7 @@ export default function Home() {
               setShowFilter((prev) => !prev);
             }}
           >
-            Add filter picture
+            Filter by genre
           </div>
           {showFilter && (
             <div className="w-fit h-fit">
