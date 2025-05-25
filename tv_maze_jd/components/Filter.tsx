@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 
 export default function Filter({
   chosenFilters,
@@ -26,7 +25,7 @@ export default function Filter({
 
   const addFilter = (filter: string) => {
     if (!chosenFilters.includes(filter)) {
-      setChosenFilters((prev: any) => [...prev, filter]);
+      setChosenFilters((prev: string) => [...prev, filter]);
     }
   };
 
