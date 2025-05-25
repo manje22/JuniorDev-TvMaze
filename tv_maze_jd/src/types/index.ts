@@ -5,5 +5,5 @@ export * from "./episode";
 export * from "./show";
 export * from "./castmember";
 export * from "./myProps";
-export * from "./ShowDb";
+export * from "./showDb";
 export * from "./actorDb";
