@@ -105,6 +105,7 @@ export default function Home() {
           height={450}
           className=""
           alt="picture of tv"
+          priority
         ></Image>
       </div>
       <div className="flex flex-col p-20 pl-5">
