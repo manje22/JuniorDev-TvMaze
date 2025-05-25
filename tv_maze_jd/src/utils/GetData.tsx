@@ -8,3 +8,6 @@ export default async function GetData(url:string) {
     console.log("Get data ", data);
     return data;
   }
+
+
+  //pomocna funckija za dohvacanje podataka, ovo je bila logika koja se ponavljala

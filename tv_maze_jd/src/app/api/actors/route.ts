@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { insertNewActor, getActors, deleteActor } from "../../db/statements";
 
+
+//dohvacanje svih redova u tablici glumaca gdje je user_mail jednak user_mail-u koji je poslan (ovo će bit user_mail iz session-a)
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
   const mail = url.searchParams.get("user_mail");

@@ -8,3 +8,5 @@ export async function initDB() {
     initialized = true;
   }
 }
+
+//funkcija za initializaciju baze

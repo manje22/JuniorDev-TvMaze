@@ -1,3 +1,5 @@
+//stranica za detaljni prikaz serije
+
 import {auth} from "@/app/auth";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -15,7 +17,7 @@ export default async function ShowPage({
 }) {
   const {id} = await params;
 
-  const session = await auth();
+  const session = await auth(); //dohvacamo session
 
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
 
@@ -24,6 +26,7 @@ export default async function ShowPage({
   }
 
   const showData = await showRes.json();
+  //objekt koji se sprema u favorite ako korinsik pozeli
   const showFav = {
     tvmaze_id: showData.id,
     user_mail: session?.user?.email,

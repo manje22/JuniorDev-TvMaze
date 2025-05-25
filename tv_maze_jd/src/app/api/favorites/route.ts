@@ -3,7 +3,7 @@ import { insertNewShow, getShows, deleteShow } from "../../db/statements";
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url);
-  const mail = url.searchParams.get("user_mail");
+  const mail = url.searchParams.get("user_mail"); //user mail će bit mail koji je sadrzan u trenutnoj sessiji
   console.log("mail from get favs: ", mail);
 
   if (!mail) {

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+//tipka vraca korisnika na vrh prozora
 export default function ScrollToTopButton() {
   const isBrowser = () => typeof window !== "undefined";
   const [isVisible, setIsVisible] = useState(false);

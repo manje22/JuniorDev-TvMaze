@@ -3,7 +3,7 @@
 
 import { useSessionContext } from "@/context/SessionContext";
 
-
+//za brisanje serija iz favorita
 
 export default function DeleteButton({id, OnDelete}:{id:number; OnDelete:()=> void;}) {
   const session = useSessionContext();

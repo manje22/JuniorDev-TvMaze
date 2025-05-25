@@ -10,11 +10,13 @@ type Result = {
   show: Show;
 }
 
+//tv maze vraca score (koliko je vjerojatnost da je opcija prava) i opciju, odnosno predlozenu seriju
+
 
 export default function SearchBar() {
 
   const [activeSearch, setActiveSearch] = useState<string>('');
-  const debouncedSearchTerm = useDebounce(activeSearch, 300);
+  const debouncedSearchTerm = useDebounce(activeSearch, 300); //ne saljemo zahtjev na svaku promjenu inputa, za optimizaciju
   const [results, setResults] = useState([]);
 
   useEffect(() => {

@@ -5,6 +5,8 @@ interface CastMemberDisplayProps {
   person: Actor;
 }
 
+//componenta za prikaz glumca/ice
+
 export default function CastMemberDisplay({ person }: CastMemberDisplayProps) {
   const data = person;
   return (

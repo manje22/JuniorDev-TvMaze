@@ -1,3 +1,4 @@
+//ovaj layout je napravljen samo da mogu dodat meta data
 
 export async function generateMetadata() {
  

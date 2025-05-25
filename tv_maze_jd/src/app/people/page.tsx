@@ -8,7 +8,7 @@ import ScrollToTopButton from "../../../components/ScrollToTopButton";
 import { Actor } from "../../types";
 import CastMemberDisplay from "../../../components/CastMemberDisplay";
 
-
+//ovdje za učitavanje još glumaca je upotrebljena ista logika kao i kod serija
 
 export default function PeoplePage() {
   const [currentPage, setCurrentPage] = useState<number>(0);

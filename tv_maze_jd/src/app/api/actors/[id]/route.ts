@@ -1,6 +1,8 @@
 import { getActorById } from "@/app/db/statements";
 
 
+
+//ovo se koristi za provjeru jeli već dodano u favorite odredenog korisnika
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> }

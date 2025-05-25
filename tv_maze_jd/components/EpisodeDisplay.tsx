@@ -10,6 +10,8 @@ interface Episode {
     };
 }
 
+//za prikaz epizode u gridu
+
 export default async function EpisodeDisplay({ episode }: {episode: Episode}) {
     const data = await episode;
     return(

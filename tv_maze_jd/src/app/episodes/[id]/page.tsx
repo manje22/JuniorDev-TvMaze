@@ -38,6 +38,7 @@ export default async function EpisodeDetails({
           <span dangerouslySetInnerHTML={{ __html: res.summary }} />
         </p>
         <p>
+          {/* ako nije dostupno prikazati N/A */}
           <strong>Rating: </strong>
           {res.rating?.average ?? "N/A"}
         </p>

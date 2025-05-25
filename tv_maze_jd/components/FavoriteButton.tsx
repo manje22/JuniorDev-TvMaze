@@ -9,6 +9,7 @@ type ShowDbEntity = {
   image:string,
 }
 
+//za dodavanje serije u favorite
 export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEntity, initialSaved:boolean}) {
   const [saved, setSaved] = useState(initialSaved);
   const [isPending, startTransition] = useTransition();
@@ -17,6 +18,7 @@ export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEn
   const user_email = session?.user?.email;
   const id = show.tvmaze_id
 
+  //kada se ucita stranica provjera jeli serija vec dodana
     useEffect(() => {
       if (!session?.user) {
         setProvjera(false);
@@ -51,14 +53,14 @@ export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEn
     });
   }
 
-  if (provjera)
+  if (provjera) //blokiranje ako je provjera u tijeku
     return (
       <button className="px-3 py-1 rounded bg-gray-300 text-gray-600" disabled>
         Provjera...
       </button>
   );
 
-  if (!session?.user) {
+  if (!session?.user) { //nema ako korisnik nije registriran
     return <div></div>;
   }
 
@@ -71,6 +73,7 @@ export default function FavoriteButton({show,initialSaved=false}:{show: ShowDbEn
         saved ? "bg-green-600" : "bg-amber-500 hover:bg-amber-600"
       }`}
     >
+      {/* prikaz ovisno o trenutnom stanju */}
       {saved
         ? "Added to favorites"
         : isPending

@@ -23,6 +23,7 @@ export default function Filter({
     "Horror",
   ];
 
+  //dodaje se filter u niz
   const addFilter = (filter: string) => {
     if (!chosenFilters.includes(filter)) {
       setChosenFilters((prev: string) => [...prev, filter]);

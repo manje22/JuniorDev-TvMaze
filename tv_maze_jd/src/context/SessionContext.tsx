@@ -26,3 +26,5 @@ export const SessionProvider = ({
 
 export default SessionContext;
 
+
+//Ovo služi za lakše dijeljenja session-a koji je potreban na više stranica (izbjegavam prop-drilling)

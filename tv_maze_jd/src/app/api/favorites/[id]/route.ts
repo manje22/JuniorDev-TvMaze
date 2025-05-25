@@ -1,7 +1,7 @@
 import { getShowById } from "@/app/db/statements";
 import { NextRequest, NextResponse } from "next/server";
 
-
+//ovo se koristi za provjeru jeli već dodano u favorite odredenog korisnik
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

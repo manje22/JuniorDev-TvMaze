@@ -8,3 +8,7 @@ export const login = async () => {
 export const logout = async () => {
     await signOut({redirectTo:"/"});
 };
+
+
+
+//funkcije za log in i out pomoću next-auth

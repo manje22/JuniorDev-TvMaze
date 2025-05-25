@@ -7,6 +7,7 @@ import Image from "next/image";
 export default async function Favorites(){
     const session = await auth();
     
+    //Ako korisnik nije registriran nema pravo pristupit favoritima
     if (!session?.user) {
         return (
           <div className="flex flex-col w-full">

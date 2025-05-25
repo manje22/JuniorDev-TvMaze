@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
+//tipka koja vraca na prethodni prozor
 export default function BackButton() {
   const router = useRouter();
 

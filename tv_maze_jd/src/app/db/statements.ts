@@ -1,6 +1,6 @@
 import db from './tursoClient';
 
-
+//kreiranje tablica SAMO ako nisu već
 export async function createTables() {
   await db.batch([
     `CREATE TABLE IF NOT EXISTS favoriteShows (

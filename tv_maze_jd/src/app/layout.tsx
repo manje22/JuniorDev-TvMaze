@@ -8,6 +8,8 @@ import { auth } from "./auth";
 import {SessionProvider} from "@/context/SessionContext";
 import { initDB } from "./init-db";
 
+
+//Funkcija za initializaciju baze, pokrece se samo jednom prvi put kad se aplikacija ucita
 initDB();
 
 const geistSans = Geist({

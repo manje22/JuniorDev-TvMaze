@@ -2,7 +2,7 @@
 
 import { useSessionContext } from "@/context/SessionContext";
 
-
+//za brisanje glumca iz favorita
 
 export default function DeleteActor({id, OnDelete}:{id:number; OnDelete:()=> void;}) {
   const session = useSessionContext();

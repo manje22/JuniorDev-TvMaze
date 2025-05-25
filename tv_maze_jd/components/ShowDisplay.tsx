@@ -3,6 +3,7 @@
 import Image from "next/image";
 import globe from "../public/globe.svg"
 
+//za prikaz serije u gridu
 
 export default function ShowDisplay({image, name}: {image?:string, name:string}) {
 

@@ -114,7 +114,7 @@ export default function Home() {
       </div>
       <div className="flex space-x-4 p-4 justify-end">
         <SearchBar />
-        <div className="flex flex-col w-fit h-fit p-5 gap-5 bg-blue-50 hover:bg-blue-100 rounded-4xl">
+        <div className="flex flex-col w-fit h-fit p-5 gap-5 bg-blue-50 rounded-4xl">
           <div
             onClick={() => {
               setShowFilter((prev) => !prev);

@@ -31,6 +31,8 @@ export default function ShowFavorites() {
   }
 
 
+  //dohvacaju se serije iz baze i prikazuju
+
   return (
     <div className="w-full min-h-screen bg-gradient-to-t from-blue-900 to-black">
       <h1 className="text-white text-6xl">Your Favorite Shows</h1>
