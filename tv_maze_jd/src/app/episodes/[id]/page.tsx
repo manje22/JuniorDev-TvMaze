@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NotFound from "./not-found";
+import { notFound } from "next/navigation"; 
 
 
 export default async function EpisodeDetails({ params }: { params: { id: string } }) {
@@ -7,7 +7,7 @@ export default async function EpisodeDetails({ params }: { params: { id: string 
   const EpisodeDetails = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
 
   if (!EpisodeDetails.ok) {
-    return NotFound();
+    return notFound();
   }
 
   const episodeData = await EpisodeDetails.json();
