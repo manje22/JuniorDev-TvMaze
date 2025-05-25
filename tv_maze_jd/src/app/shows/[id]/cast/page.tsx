@@ -1,6 +1,6 @@
 import Link from "next/link";
 import CastMemberDisplay from "../../../../../components/CastMemberDisplay";
-import { Castmember, MyProps } from "@/types";
+import { Castmember} from "@/types";
 import GetData from "@/utils/GetData";
 import ScrollToTopButton from "../../../../../components/ScrollToTopButton";
 
