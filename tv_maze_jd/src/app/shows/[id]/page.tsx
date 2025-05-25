@@ -8,7 +8,7 @@ import globe from "../../../../public/globe.svg";
 import { Castmember} from "@/types";
 
 
-export async function ShowPage({
+export default async function ShowPage({
   params,
 }: {
   params: Promise<{id:string}>
