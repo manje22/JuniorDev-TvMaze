@@ -1,9 +1,8 @@
 import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
-import { MyProps } from "@/types";
 
 
-export async function generateMetadata({ params }: MyProps) {
+export async function generateMetadata({ params }: { params: { id: string } }) {
   const  id  = parseInt(params.id, 10);
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
   if (!showRes.ok) return { title: "Show not found" };
