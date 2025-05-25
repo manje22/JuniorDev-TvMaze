@@ -2,8 +2,14 @@ import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const  id  = parseInt(params.id, 10);
+
+
+export async function generateMeta({
+  params,
+}: {
+  params: Promise<{id:string}>
+}) {
+  const {id} = await params;
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
   if (!showRes.ok) return { title: "Show not found" };
  
@@ -21,14 +27,15 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 }
 
 
+
 export default async function ShowLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { id: string };
+  params: Promise<{id:string}>
 }) {
-  const { id } = params;
+  const {id} = await params;
   return (
     <div className="flex">
       <aside className="w-[200px] bg-amber-100">

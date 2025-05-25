@@ -1,25 +1,16 @@
 import Link from "next/link";
 import EpisodeDisplay from "../../../../../components/EpisodeDisplay";
-import { MyProps } from "@/types";
 import GetData from "@/utils/GetData";
 import ScrollToTopButton from "../../../../../components/ScrollToTopButton";
 
 
 
-interface Episode {
-  id: string;
-  name: string;
-  airdate: string;
-  image: {
-    medium: string;
-    original: string;
-  };
-}
-
-
-export default async function ShowEpisodes({params}: MyProps) {
-    
-    const id = params.id;
+export default async function ActorDetails({
+  params,
+}: {
+  params: Promise<{id:string}>
+}) {
+  const {id} = await params;
     const url = `https://api.tvmaze.com/shows/${id}/episodes`;
 
     const episodeData = await GetData(url);

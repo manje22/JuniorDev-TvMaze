@@ -5,12 +5,16 @@ import Link from "next/link";
 import BackButton from "../../../../components/BackButton";
 import FavoriteButton from "../../../../components/FavoriteButton";
 import globe from "../../../../public/globe.svg";
-import { Castmember, MyProps } from "@/types";
+import { Castmember} from "@/types";
 
 
+export async function generateMeta({
+  params,
+}: {
+  params: Promise<{id:string}>
+}) {
+  const {id} = await params;
 
-export default async function ShowDetails({ params }: MyProps) {
-  const id = parseInt(params.id, 10);
   const session = await auth();
 
   const showRes = await fetch(`https://api.tvmaze.com/shows/${id}?embed=cast`);
