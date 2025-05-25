@@ -1,9 +1,13 @@
+
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
-
-export default async function EpisodeDetails(props:unknown) {
-  const epId = props.id;
+export default async function EpisodeDetails({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const epId = params.id;
 
   const response = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
 
@@ -35,7 +39,7 @@ export default async function EpisodeDetails(props:unknown) {
         </p>
         <p>
           <strong>Rating: </strong>
-          {res.rating.average}
+          {res.rating?.average ?? "N/A"}
         </p>
         <p>
           <strong>Airdate: </strong>
