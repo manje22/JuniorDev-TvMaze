@@ -40,7 +40,7 @@ export default function AddFavoriteButton({show,initialSaved=false}:{show: ShowD
 
   async function addFavorite() {
     startTransition(async () => {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/favorites`, { //opet možemo poslat url
+      const res = await fetch(`/api/favorites`, { //opet možemo poslat url
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({tvmaze_id: show.tvmaze_id, user_mail: user_email, name:show.name, image: show.image}), //prilagodit cemo
