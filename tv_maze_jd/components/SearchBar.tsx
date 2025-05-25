@@ -11,6 +11,8 @@ type Result = {
 }
 
 //tv maze vraca score (koliko je vjerojatnost da je opcija prava) i opciju, odnosno predlozenu seriju
+//https://nextjs.org/learn/dashboard-app/adding-search-and-pagination
+//https://dev.to/stephengade/build-a-functional-search-bar-in-nextjs-mig
 
 
 export default function SearchBar() {

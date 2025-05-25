@@ -12,3 +12,4 @@ export const logout = async () => {
 
 
 //funkcije za log in i out pomoću next-auth
+//https://www.youtube.com/watch?v=n-fVrzaikBQ&t=198s

@@ -1,6 +1,9 @@
 import db from './tursoClient';
 
 //kreiranje tablica SAMO ako nisu već
+//https://www.youtube.com/watch?v=GoDERit8mVo
+//https://turso.tech/
+
 export async function createTables() {
   await db.batch([
     `CREATE TABLE IF NOT EXISTS favoriteShows (
