@@ -1,13 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
-type EpisodePageProps = {
-  params: {
-    id: string;
-  };
-};
 
-export default async function EpisodeDetails({ params }: EpisodePageProps) {
+export default async function EpisodeDetails({ params }: { params: { id: string } }) {
   const epId = params.id;
 
   const response = await fetch(`https://api.tvmaze.com/episodes/${epId}`);
