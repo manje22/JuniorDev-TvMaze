@@ -8,7 +8,8 @@ import BackButton from "../../../../components/BackButton";
 
 
 export async function generateMetadata({ params }: MyProps) {
-  const  id  = parseInt(params.id, 10);
+  const awaitedParams = await params;
+  const  id  = parseInt(awaitedParams.id, 10);
   const res = await fetch(`https://api.tvmaze.com/people/${id}?embed=castcredits`);
   if (!res.ok) return { title: "Actor not found" };
  
@@ -29,7 +30,9 @@ export async function generateMetadata({ params }: MyProps) {
 export default async function ActorDetails({ params }: MyProps) {
   const session = await auth();
 
-  const id = parseInt(params.id, 10);
+  const resolvedParams = await params;
+  const id = parseInt(resolvedParams.id, 10);
+  
   const url = `https://api.tvmaze.com/people/${id}?embed=castcredits`
   const actorData = await GetData(url); 
 
