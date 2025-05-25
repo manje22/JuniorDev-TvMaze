@@ -6,8 +6,9 @@ import { SignInBtn } from "../../components/SignInBtn";
 import { SignOutBtn } from "../../components/SignOutBtn";
 import { auth } from "./auth";
 import {SessionProvider} from "@/context/SessionContext";
+import { initDB } from "./init-db";
 
-
+initDB();
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
