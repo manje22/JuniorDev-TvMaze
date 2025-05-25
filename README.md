@@ -16,7 +16,7 @@ Upute za lokalno pokretanje
 - git clone, npm install, npm run dev, projekt koristi port 3000 pa je potrebno da bude slobodan
 
 Build i deploy
-- sve default naredbe
+- sve default naredbe (npm run build)
 - link: https://junior-dev-tv-maze-zavrsni-2a70u3qk7-marielas-projects-f5f3e3c6.vercel.app
 
 Poznate greske
