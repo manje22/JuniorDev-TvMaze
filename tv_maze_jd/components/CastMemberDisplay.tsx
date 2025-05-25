@@ -7,7 +7,6 @@ interface CastMemberDisplayProps {
 
 export default function CastMemberDisplay({ person }: CastMemberDisplayProps) {
   const data = person;
-  console.log("Person: ", person);
   return (
     <div className="w-fit h-fit p-10 flex flex-col items-center">
       <div className="transition delay-75 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
