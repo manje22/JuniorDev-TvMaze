@@ -12,9 +12,9 @@ export default function BackButton() {
   return (
     <button
       onClick={handleClick}
-      className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded-md transition-colors"
+      className="bg-blue-400 hover:bg-blue-600 text-white px-3 py-1 rounded-2xl fixed bottom-5 left-15"
     >
-      Back
+      Go back
     </button>
   );
 }

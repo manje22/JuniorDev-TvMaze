@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
 import ScrollToTopButton from "../../../components/ScrollToTopButton";
@@ -14,7 +15,7 @@ export default function PeoplePage() {
   const [displayCount, setDisplayCount] = useState(0);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const { ref, inView } = useInView();
-  const viewPerPage:number = 24;
+  const viewPerPage: number = 24;
 
   useEffect(() => {
     //Sprijecava vise fetcha ako je npr. spor internet ili nesto drugo bloka
@@ -60,13 +61,24 @@ export default function PeoplePage() {
     if (inView) loadMore();
   }, [inView, loadMore]);
 
-
   return (
     <main className="flex flex-col">
-      <div className="grid grid-cols-4 gap-10 mt-20">
-        {display.map((a:Actor) => (
-          <Link href={`/people/${a.id}`} key={a.id}>
-            <CastMemberDisplay person={a}/>
+      <div className="w-full h-auto bg-black flex flex-col items-center ">
+        <h1 className="text-white m-10 pt-5 font-bold text-4xl ">
+          The best site for all your favorite actors
+        </h1>
+        <Image
+          src={"/tvStock.jpg"}
+          width={450}
+          height={450}
+          className=""
+          alt="picture of tv"
+        ></Image>
+      </div>
+      <div className="m-auto grid grid-cols-5 gap-20 mt-20">
+        {display.map((a: Actor) => (
+          <Link href={`/people/${a.id}`} key={a.id} className="shadow-2xl">
+            <CastMemberDisplay person={a} />
           </Link>
         ))}
       </div>

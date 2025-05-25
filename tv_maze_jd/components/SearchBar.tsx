@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Show } from "@/types";
@@ -27,7 +27,8 @@ export default function SearchBar() {
       })
       .catch((err) => console.error(err));
     }
-  }, [debouncedSearchTerm])
+  }, [debouncedSearchTerm]);
+
 
 
   return (
@@ -52,8 +53,6 @@ export default function SearchBar() {
           </div>
         )
       }
-
-      
     </form>
   );
 }

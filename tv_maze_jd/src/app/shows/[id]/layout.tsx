@@ -12,9 +12,9 @@ export default async function ShowLayout({
   return (
     <div className="flex">
       <aside className="w-[200px] bg-amber-100">
-        <h2>Show Menu</h2>
+        <h1 className="text-3xl mb-5">Show Menu</h1>
         <nav>
-          <ul>
+          <ul className="flex flex-col gap-4">
             <li>
               <Link href={`/shows/${id}/cast`}>
                 Click here to view cast members
@@ -26,11 +26,13 @@ export default async function ShowLayout({
               </Link>
             </li>
             <li>
-              <Link href={'/favorites/favoriteShows'}>Favorite shows</Link>
+              <Link href={'/favorites/favoriteShows'}>View Your Favorite shows</Link>
             </li>
           </ul>
         </nav>
-        <BackButton></BackButton>
+        <div className="mt-10">
+          <BackButton></BackButton>
+        </div>
       </aside>
       <main className="flex-1 p-4">{children}</main>
     </div>

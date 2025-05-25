@@ -13,10 +13,10 @@ export default async function EpisodeDisplay({ episode }: {episode: Episode}) {
     return(
         <div>
             <div>
-                <Image src={data.image.medium} width={50} height={50} alt="image"></Image>
+                <Image src={data.image.medium} width={500} height={500} alt="image"></Image>
             </div>
-            <div>
-                <p>Naziv epizode: {data.name}</p>
+            <div className="flex flex-col gap-5 m-10 text-2xl font-bold">
+                <p>Name: {data.name}</p>
                 <p>Release Date: {data.airdate}</p>
             </div>
         </div>

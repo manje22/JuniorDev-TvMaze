@@ -8,8 +8,11 @@ import SearchBar from "../../components/SearchBar";
 import Filter from "../../components/Filter";
 import ScrollToTopButton from "../../components/ScrollToTopButton";
 import { Show } from "../types";
+import tvstock from "../../public/tvStock.jpg";
+import Image from "next/image";
 
 export default function Home() {
+  const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [showData, setShowData] = useState<Show[]>([]);
   const [display, setDisplay] = useState<Show[]>([]);
@@ -92,19 +95,50 @@ export default function Home() {
 
   return (
     <main className="flex flex-col">
-      <div className="flex space-x-4">
+      <div className="w-full h-auto bg-black flex flex-col items-center ">
+        <h1 className="text-white m-10 pt-5 font-bold text-4xl ">
+          The best site for all your shows
+        </h1>
+        <Image
+          src={tvstock}
+          width={450}
+          height={450}
+          className=""
+          alt="picture of tv"
+        ></Image>
+      </div>
+      <div className="flex flex-col p-20 pl-5">
+        <h1 className="text-4xl">Browse and search for shows, save your favorites and more...</h1>
+        <h2 className="text-3xl">Make sure to log in for the full experience</h2>
+      </div>
+      <div className="flex space-x-4 p-4 justify-end">
         <SearchBar />
-        <Filter
-          chosenFilters={choosenFilters}
-          setChosenFilters={setChoosenFilters}
-        />
-        <button
-          onClick={handleApply}
-          className="px-4 py-2 bg-amber-600 hover:bg-amber-800 text-white rounded"
-        >
-          Apply
-        </button>
-        <button onClick={(e) => ClearFilters(e)}>Clear</button>
+        <div className="flex flex-col w-fit h-fit p-5 gap-5 bg-blue-50 hover:bg-blue-100 rounded-4xl">
+          <div
+            onClick={() => {
+              setShowFilter((prev) => !prev);
+            }}
+          >
+            Add filter picture
+          </div>
+          {showFilter && (
+            <div className="w-fit h-fit">
+              <Filter
+                chosenFilters={choosenFilters}
+                setChosenFilters={setChoosenFilters}
+              />
+              <div className="flex gap-3 mt-5">
+                <button
+                  onClick={handleApply}
+                  className="px-4 py-2 bg-amber-600 hover:bg-amber-800 text-white rounded"
+                >
+                  Apply
+                </button>
+                <button onClick={(e) => ClearFilters(e)}>Clear</button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-4 gap-10 mt-20">
         {display.map((s: Show) => (

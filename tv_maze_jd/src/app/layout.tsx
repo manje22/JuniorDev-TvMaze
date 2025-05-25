@@ -35,19 +35,19 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="w-full px-8 py-3 flex items-center shadow-2xl">
+        <header className="w-full px-8 py-3 flex items-center bg-black text-white">
           <nav className="flex justify-between items-center w-full">
-            <Link href={"/"} className="h-full">
+            <Link href={"/"} className="h-full transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
               Homepage
             </Link>
             <ul className="flex items-center gap-8">
-              <li>
-                <Link href={"/favorites"} className="hover:bg-white">
+              <li className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
+                <Link href={"/favorites"}>
                   Favorites
                 </Link>
               </li>
-              <li>
-                <Link href={"/people"} className="hover:bg-white">
+              <li className="transition delay-150 duration-300 ease-in-out hover:-translate-y-1">
+                <Link href={"/people"}>
                   Actors
                 </Link>
               </li>

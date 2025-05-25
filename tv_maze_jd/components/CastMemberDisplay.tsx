@@ -6,21 +6,30 @@ interface CastMemberDisplayProps {
 }
 
 export default function CastMemberDisplay({ person }: CastMemberDisplayProps) {
-    const data = person;
-    console.log("Person: ", person);
-    return(
-        <div>
-            <div>
-                {data.image?.medium ? 
-                    <Image src={data.image?.medium} width={50} height={50} alt="image"></Image> :
-                    <div className="w-[50px] h-[50px] bg-black text-white">No Image</div>
-                }
-            </div>
-            <div>
-                <p>Name: {data.name || "n/a"}</p>
-                <p>Date of birth: {data.birthday || "n/a"}</p>
-                <p>Country of origin: {data.country?.name || "n/a"}</p>
-            </div>
-        </div>
-    )
+  const data = person;
+  console.log("Person: ", person);
+  return (
+    <div className="w-fit h-fit p-10 flex flex-col items-center">
+      <div className="transition delay-75 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110">
+        {data.image?.medium ? (
+          <Image
+            src={data.image?.medium}
+            width={300}
+            height={300}
+            alt="image"
+          ></Image>
+        ) : (
+          <Image
+            src={"/globe.svg"}
+            width={300}
+            height={300}
+            alt="no image"
+          ></Image>
+        )}
+      </div>
+      <div className="mt-5 text-center">
+        <p className="text-2xl font-bold">{data.name || "no name available"}</p>
+      </div>
+    </div>
+  );
 }

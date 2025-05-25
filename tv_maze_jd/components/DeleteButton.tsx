@@ -30,9 +30,9 @@ export default function DeleteButton({id, OnDelete}:{id:number; OnDelete:()=> vo
   return (
     <button
       onClick={removeFavorite}
-      className="bg-red-600 text-white hover:bg-red-100"
+      className="bg-red-600 text-white p-3 rounded-4xl text-center w-fit hover:bg-red-700"
     >
-        Remove from favorites
+        Del
     </button>
   );
 }

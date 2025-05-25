@@ -4,6 +4,7 @@ import ActorFavorite from "../../../../components/ActorFavorite";
 import { auth } from "@/app/auth";
 import { MyProps } from "@/types";
 import GetData from "@/utils/GetData";
+import BackButton from "../../../../components/BackButton";
 
 export default async function ActorDetails({ params }: MyProps) {
   const session = await auth();
@@ -25,7 +26,10 @@ export default async function ActorDetails({ params }: MyProps) {
   
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center mt-10 gap-5">
+      <div>
+        <p className="text-center text-6xl font-bold">{actorData.name}</p>
+      </div>
       <div>
         <Image
           src={actorData.image.original}
@@ -34,19 +38,17 @@ export default async function ActorDetails({ params }: MyProps) {
           alt="image"
         ></Image>
       </div>
-      <div>
-        <p>Name: {actorData.name}</p>
+      <div className="mt-10 text-2xl">
         <p>County: {actorData.country?.name || "n/a"}</p>
         <p>Birthday: {actorData.birthday}</p>
       </div>
-      <div>
-        <p>Appears in:</p>
-        <div>
-          nek ovde idu baren imena serija i imena lika kojeg su glumili, dodat
-          link na str sa page info?
-        </div>
+
+      <div className="mt-5 mb-10">
+        <ActorFavorite actor={actorFav} initialSaved={false} />
       </div>
-      <ActorFavorite actor={actorFav} initialSaved={false} />
+      <div>
+        <BackButton></BackButton>
+      </div>  
     </div>
   );
 }
