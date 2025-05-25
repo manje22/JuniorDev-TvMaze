@@ -4,8 +4,12 @@ import { Castmember, MyProps } from "@/types";
 import GetData from "@/utils/GetData";
 import ScrollToTopButton from "../../../../../components/ScrollToTopButton";
 
-export default async function ShowCast({ params }: MyProps) {
-  const id = params.id;
+export default async function ActorDetails({
+  params,
+}: {
+  params: Promise<{id:string}>
+}) {
+  const {id} = await params;
   const url = `https://api.tvmaze.com/shows/${id}/cast`;
 
   const castData = await GetData(url);
