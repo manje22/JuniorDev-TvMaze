@@ -8,6 +8,8 @@ import ScrollToTopButton from "../../../components/ScrollToTopButton";
 import { Actor } from "../../types";
 import CastMemberDisplay from "../../../components/CastMemberDisplay";
 
+
+
 export default function PeoplePage() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [ActorData, setActorData] = useState<Actor[]>([]);
@@ -73,6 +75,7 @@ export default function PeoplePage() {
           height={450}
           className=""
           alt="picture of tv"
+          priority
         ></Image>
       </div>
       <div className="m-auto grid grid-cols-5 gap-20 mt-20">
